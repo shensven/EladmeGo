@@ -1,18 +1,25 @@
 import React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  useNavigationContainerRef,
+} from '@react-navigation/native';
 import {
   HeaderStyleInterpolators,
   TransitionPresets,
   createStackNavigator,
 } from '@react-navigation/stack';
+import {useFlipper} from '@react-navigation/devtools';
 import {Home} from './screen/home';
 import {Settings} from './screen/settings';
 
 const {Navigator, Screen} = createStackNavigator();
 
 function AppStack() {
+  const navigationRef = useNavigationContainerRef();
+  useFlipper(navigationRef);
+
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Navigator
         initialRouteName="Home"
         screenOptions={{
