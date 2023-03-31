@@ -1,0 +1,64 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - dev
+  pull_request:
+    branches:
+      - dev
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: 11
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/android/*.gradle', '**/android/*.properties', '**/android/gradle/wrapper/gradle-wrapper.properties', '**/android/app/*.gradle') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Cache node_modules
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Gradlew test
+        run: |
+          cd android && chmod +x gradlew 
+          echo "MYAPP_UPLOAD_STORE_PASSWORD=test" >> gradle.properties
+          echo "MYAPP_UPLOAD_KEY_PASSWORD=test" >> gradle.properties
+          ./gradlew test
+
+      - name: ESLint
+        run: yarn lint
+
+      - name: Jest
+        run: yarn test
