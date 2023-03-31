@@ -5,7 +5,7 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "lint": "eslint .",
+    "lint": "eslint . --cache --ext .js,.jsx,.ts,.tsx",
     "start": "react-native start",
     "test": "jest"
   },
