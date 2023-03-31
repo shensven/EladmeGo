@@ -35,7 +35,7 @@
     "prettier": "^2.4.1",
     "react-native-flipper": "^0.164.0",
     "react-test-renderer": "18.2.0",
-    "typescript": "4.8.4"
+    "typescript": "5.0.3"
   },
   "jest": {
     "preset": "react-native",
