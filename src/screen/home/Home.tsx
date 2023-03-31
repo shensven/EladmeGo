@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, Text, Button} from 'react-native';
+import {View, Text} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
+import {Button} from 'react-native-paper';
 
 type StackParam = {
   Settings: undefined;
@@ -15,11 +16,12 @@ function Home() {
     <View>
       <Text>Home</Text>
       <Button
-        title="Setting"
+        mode="contained"
         onPress={() => {
           navigation.navigate('Settings');
-        }}
-      />
+        }}>
+        Setting
+      </Button>
     </View>
   );
 }
