@@ -5,6 +5,7 @@ import {useFlipper} from '@react-navigation/devtools';
 import {useAppearance} from './utils/appearance';
 import {Home, HeaderRight} from './screen/home';
 import {Settings} from './screen/settings';
+import {Appearance} from './screen/appearance';
 
 const {Navigator, Screen} = createStackNavigator();
 
@@ -40,6 +41,7 @@ function AppStack() {
           }}
         />
         <Screen name="Settings" component={Settings} options={{headerTitle: '设置'}} />
+        <Screen name="Appearance" component={Appearance} options={{headerTitle: '外观'}} />
       </Navigator>
     </NavigationContainer>
   );
