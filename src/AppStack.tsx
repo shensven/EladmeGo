@@ -7,6 +7,7 @@ import {Home, HeaderRight} from '@/screen/Home';
 import {Settings} from '@/screen/Settings';
 import {AccessToken} from '@/screen/AccessToken';
 import {Appearance} from '@/screen/Appearance';
+import {About} from '@/screen/About';
 
 const {Navigator, Screen} = createStackNavigator();
 
@@ -44,6 +45,7 @@ function AppStack() {
         <Screen name="Settings" component={Settings} options={{headerTitle: '设置'}} />
         <Screen name="AccessToken" component={AccessToken} options={{headerTitle: '访问令牌'}} />
         <Screen name="Appearance" component={Appearance} options={{headerTitle: '外观'}} />
+        <Screen name="About" component={About} options={{headerTitle: '关于'}} />
       </Navigator>
     </NavigationContainer>
   );
