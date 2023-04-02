@@ -8,7 +8,7 @@ import type {AxiosResponse} from 'axios';
 
 function AccessToken() {
   const {paperTheme} = useAppearance();
-  const {accessToken, setAccessToken} = useAccessToken();
+  const {accessToken, storeAccessToken} = useAccessToken();
   const axios = useAxios();
 
   const [form, setForm] = useState({
@@ -26,7 +26,7 @@ function AccessToken() {
         switch (data.code) {
           case 0:
             Alert.alert('验证成功');
-            setAccessToken(form.accessToken);
+            storeAccessToken(form.accessToken);
             break;
           case 401:
             Alert.alert('验证失败', data.message);
