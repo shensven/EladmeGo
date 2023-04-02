@@ -5,6 +5,8 @@ import {useAppearance} from '@/utils/appearance';
 import {useAccessToken, useAxios} from '@/utils/httpClient';
 import {IcRoundVisibility, IcRoundVisibilityOff} from '@/component/icon';
 import type {AxiosResponse} from 'axios';
+import jwtDecode from 'jwt-decode';
+import dayjs from 'dayjs';
 
 function AccessToken() {
   const {paperTheme} = useAppearance();
@@ -25,7 +27,8 @@ function AccessToken() {
         const {data} = resp;
         switch (data.code) {
           case 0:
-            Alert.alert('验证成功');
+            const {exp}: {exp: number} = jwtDecode(form.accessToken);
+            Alert.alert('验证成功', `过期时间：${dayjs.unix(exp).format('YYYY-MM-DD HH:mm:ss')}`);
             storeAccessToken(form.accessToken);
             break;
           case 401:
