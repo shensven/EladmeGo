@@ -1,4 +1,5 @@
 import {jest} from '@jest/globals';
+import mockRNDeviceInfo from 'react-native-device-info/jest/react-native-device-info-mock';
 import '@react-native-async-storage/async-storage/jest/async-storage-mock';
 
 jest.useFakeTimers();
@@ -14,6 +15,8 @@ jest.mock('react-native-reanimated', () => {
   Reanimated.default.call = () => {};
   return Reanimated;
 });
+
+jest.mock('react-native-device-info', () => mockRNDeviceInfo);
 
 jest.mock('@react-navigation/stack', () => {
   return {
