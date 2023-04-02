@@ -4,8 +4,6 @@ import useAccessToken from './useAccessToken';
 const useAxios = () => {
   const {accessToken} = useAccessToken();
 
-  console.log('accessToken', accessToken);
-
   axiosInstance.interceptors.request.use(
     config => {
       if (accessToken.length > 0) {

@@ -18,7 +18,6 @@ function AccessToken() {
   });
 
   const submit = () => {
-    console.log('form', form);
     axiosInstance
       .get('/member/v1/member/active', {
         headers: {
@@ -27,8 +26,6 @@ function AccessToken() {
       })
       .then((resp: AxiosResponse<{code: number; message: string; result: []}>) => {
         const {data} = resp;
-
-        console.log('data', data);
 
         switch (data.code) {
           case 0:
@@ -43,9 +40,7 @@ function AccessToken() {
             Alert.alert('验证失败');
         }
       })
-      .catch(error => {
-        console.log(error);
-      });
+      .catch(console.error);
   };
 
   const clear = () => {

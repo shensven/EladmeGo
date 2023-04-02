@@ -14,8 +14,8 @@ const useAsyncStorageFlipperPlugin = () => {
         }),
       );
       return localStorageContent;
-    } catch (e) {
-      console.error(e);
+    } catch {
+      console.error;
     }
   };
 
@@ -39,7 +39,6 @@ const useAsyncStorageFlipperPlugin = () => {
         connection.receive('update', async data => {
           await AsyncStorage.clear();
           data.value.forEach((dataItem: any) => {
-            console.log(dataItem);
             AsyncStorage.setItem(dataItem.id, dataItem.content);
           });
         });
