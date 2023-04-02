@@ -3,9 +3,10 @@ import {NavigationContainer, useNavigationContainerRef} from '@react-navigation/
 import {HeaderStyleInterpolators, TransitionPresets, createStackNavigator} from '@react-navigation/stack';
 import {useFlipper} from '@react-navigation/devtools';
 import {useAppearance} from './utils/appearance';
-import {Home, HeaderRight} from './screen/home';
-import {Settings} from './screen/settings';
-import {Appearance} from './screen/appearance';
+import {Home, HeaderRight} from './screen/Home';
+import {Settings} from './screen/Settings';
+import {AccessToken} from './screen/AccessToken';
+import {Appearance} from './screen/Appearance';
 
 const {Navigator, Screen} = createStackNavigator();
 
@@ -41,6 +42,7 @@ function AppStack() {
           }}
         />
         <Screen name="Settings" component={Settings} options={{headerTitle: '设置'}} />
+        <Screen name="AccessToken" component={AccessToken} options={{headerTitle: '访问令牌'}} />
         <Screen name="Appearance" component={Appearance} options={{headerTitle: '外观'}} />
       </Navigator>
     </NavigationContainer>

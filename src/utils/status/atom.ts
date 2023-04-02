@@ -7,4 +7,6 @@ const themeSchemeAtom = atom<'light' | 'dark' | 'system'>('system');
 const paperThemeAtom = atom<MD3Theme>(paperLightTheme);
 const navigationThemeAtom = atom<NavigationTheme>(navigationLightTheme);
 
-export {themeSchemeAtom, paperThemeAtom, navigationThemeAtom};
+const accessTokenAtom = atom<string>('');
+
+export {themeSchemeAtom, paperThemeAtom, navigationThemeAtom, accessTokenAtom};

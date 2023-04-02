@@ -14,3 +14,5 @@ export {default as IcRoundOpenInNew} from './IcRoundOpenInNew';
 export {default as IcRoundSearch} from './IcRoundSearch';
 export {default as IcRoundShare} from './IcRoundShare';
 export {default as IcRoundShield} from './IcRoundShield';
+export {default as IcRoundVisibilityOff} from './IcRoundVisibilityOff';
+export {default as IcRoundVisibility} from './IcRoundVisibility';

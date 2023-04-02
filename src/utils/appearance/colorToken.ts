@@ -4,7 +4,7 @@ import type {Theme as _NavigationTheme} from '@react-navigation/native';
 
 const paperLightTheme = {
   ...MD3LightTheme,
-  roundness: 16,
+  roundness: 12,
   colors: {
     ...MD3LightTheme.colors,
 

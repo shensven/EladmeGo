@@ -17,6 +17,7 @@ import color from 'color';
 
 type StackParamList = {
   Welcome: undefined;
+  AccessToken: undefined;
   Appearance: undefined;
   PrivacyPolicy: undefined;
   OpenSourceLibraries: undefined;
@@ -40,8 +41,7 @@ const useData = () => {
       title: '访问令牌',
       leftIcon: <IcRoundAdminPanelSettings color={color(colors.onBackground).alpha(0.9).toString()} />,
       rightIcon: <IcRoundChevronRight color={color(colors.onBackground).alpha(0.7).toString()} />,
-      // onPress: () => navigation.navigate('AccessToken'),
-      onPress: () => {},
+      onPress: () => navigation.navigate('AccessToken'),
     },
     {
       title: '外观',
