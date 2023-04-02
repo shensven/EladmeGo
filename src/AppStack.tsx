@@ -2,11 +2,11 @@ import React from 'react';
 import {NavigationContainer, useNavigationContainerRef} from '@react-navigation/native';
 import {HeaderStyleInterpolators, TransitionPresets, createStackNavigator} from '@react-navigation/stack';
 import {useFlipper} from '@react-navigation/devtools';
-import {useAppearance} from './utils/appearance';
-import {Home, HeaderRight} from './screen/Home';
-import {Settings} from './screen/Settings';
-import {AccessToken} from './screen/AccessToken';
-import {Appearance} from './screen/Appearance';
+import {useAppearance} from '@/utils/appearance';
+import {Home, HeaderRight} from '@/screen/Home';
+import {Settings} from '@/screen/Settings';
+import {AccessToken} from '@/screen/AccessToken';
+import {Appearance} from '@/screen/Appearance';
 
 const {Navigator, Screen} = createStackNavigator();
 
