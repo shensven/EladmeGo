@@ -31,11 +31,10 @@ const useData = () => {
 
   const data = [
     {
-      title: '欢迎光临',
+      title: '欢迎',
       leftIcon: <IcRoundAutoAwesome color={color(colors.onBackground).alpha(0.9).toString()} />,
       rightIcon: <IcRoundChevronRight color={color(colors.onBackground).alpha(0.7).toString()} />,
-      // onPress: () => navigation.navigate('Welcome'),
-      onPress: () => {},
+      onPress: () => navigation.navigate('Welcome'),
     },
     {
       title: '访问令牌',
