@@ -1,6 +1,13 @@
 import {jest} from '@jest/globals';
+import '@react-native-async-storage/async-storage/jest/async-storage-mock';
 
 jest.useFakeTimers();
+
+jest.mock('react-native-flipper', () => {
+  return {
+    addPlugin: jest.fn(),
+  };
+});
 
 jest.mock('react-native-reanimated', () => {
   const Reanimated = require('react-native-reanimated/mock');
@@ -28,3 +35,7 @@ jest.mock('@react-navigation/devtools', () => {
     useFlipper: jest.fn(),
   };
 });
+
+jest.mock('@react-native-async-storage/async-storage', () =>
+  require('@react-native-async-storage/async-storage/jest/async-storage-mock'),
+);
