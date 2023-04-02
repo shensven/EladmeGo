@@ -1,4 +1,4 @@
-package com.eladmego;
+package com.shensven.eladmego;
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;

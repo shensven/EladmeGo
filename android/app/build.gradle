@@ -93,9 +93,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.eladmego"
+    namespace "com.shensven.eladmego"
     defaultConfig {
-        applicationId "com.eladmego"
+        applicationId "com.shensven.eladmego"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

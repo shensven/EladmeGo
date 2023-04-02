@@ -1,4 +1,4 @@
-package com.eladmego;
+package com.shensven.eladmego;
 
 import android.app.Application;
 import com.facebook.react.PackageList;
