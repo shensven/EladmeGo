@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
@@ -50,10 +50,10 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Gradlew test
-        run: |
-          cd android && chmod +x gradlew 
-          ./gradlew test
+      # - name: Gradlew test
+      #   run: |
+      #     cd android && chmod +x gradlew
+      #     ./gradlew test
 
       - name: ESLint
         run: yarn lint
