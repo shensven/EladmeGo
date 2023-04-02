@@ -61,8 +61,7 @@ const useData = () => {
       description: 'https://github.com/shensven/EladmeGo/issues',
       leftIcon: <IcRoundBugReport color={color(colors.onBackground).alpha(0.9).toString()} />,
       rightIcon: <IcRoundOpenInNew color={color(colors.onBackground).alpha(0.7).toString()} size={18} />,
-      // onPress: () => Linking.openURL('https://github.com/shensven/Readhub-RN/issues'),
-      onPress: () => {},
+      onPress: () => Linking.openURL('https://github.com/shensven/EladmeGo/issues'),
     },
     {
       title: '关于',
