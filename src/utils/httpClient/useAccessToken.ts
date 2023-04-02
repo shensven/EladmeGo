@@ -3,14 +3,22 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {accessTokenAtom} from '../status/atom';
 
 const useAccessToken = () => {
-  const [_accessToken, setAccessToken] = useAtom(accessTokenAtom);
+  const [_accessToken, _setAccessToken] = useAtom(accessTokenAtom);
 
   const storeAccessToken = (accessToken: string) => {
-    setAccessToken(accessToken);
+    _setAccessToken(accessToken);
     AsyncStorage.setItem('@accessToken', accessToken);
   };
 
-  return {accessToken: _accessToken, setAccessToken, storeAccessToken};
+  const restoreAccessToken = async () => {
+    AsyncStorage.getItem('@accessToken').then(accessTokenValue => {
+      if (accessTokenValue) {
+        _setAccessToken(accessTokenValue);
+      }
+    });
+  };
+
+  return {accessToken: _accessToken, setAccessToken: _setAccessToken, storeAccessToken, restoreAccessToken};
 };
 
 export default useAccessToken;

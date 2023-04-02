@@ -1,16 +1,11 @@
 import {useLayoutEffect} from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useAccessToken} from '@/utils/httpClient';
 
 const useAppEffect = () => {
-  const {setAccessToken} = useAccessToken();
+  const {restoreAccessToken} = useAccessToken();
 
   useLayoutEffect(() => {
-    AsyncStorage.getItem('@accessToken').then(_accessToken => {
-      if (_accessToken) {
-        setAccessToken(_accessToken);
-      }
-    });
+    restoreAccessToken();
   }, []);
 };
 
