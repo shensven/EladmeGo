@@ -18,7 +18,18 @@ const useAccessToken = () => {
     });
   };
 
-  return {accessToken: _accessToken, setAccessToken: _setAccessToken, storeAccessToken, restoreAccessToken};
+  const clearAccessToken = () => {
+    _setAccessToken('');
+    AsyncStorage.removeItem('@accessToken');
+  };
+
+  return {
+    accessToken: _accessToken,
+    setAccessToken: _setAccessToken,
+    storeAccessToken,
+    restoreAccessToken,
+    clearAccessToken,
+  };
 };
 
 export default useAccessToken;

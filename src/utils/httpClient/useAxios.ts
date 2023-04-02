@@ -4,9 +4,11 @@ import useAccessToken from './useAccessToken';
 const useAxios = () => {
   const {accessToken} = useAccessToken();
 
+  console.log('accessToken', accessToken);
+
   axiosInstance.interceptors.request.use(
     config => {
-      if (accessToken) {
+      if (accessToken.length > 0) {
         config.headers.Authorization = `Bearer ${accessToken}`;
       }
       return config;
