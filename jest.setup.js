@@ -1,8 +1,9 @@
 import {jest} from '@jest/globals';
 import mockRNDeviceInfo from 'react-native-device-info/jest/react-native-device-info-mock';
-import '@react-native-async-storage/async-storage/jest/async-storage-mock';
 
 jest.useFakeTimers();
+
+jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
 
 jest.mock('react-native-flipper', () => {
   return {
