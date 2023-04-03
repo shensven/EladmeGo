@@ -1,9 +1,12 @@
 import React from 'react';
 import RNBootSplash from 'react-native-bootsplash';
 import {NavigationContainer, useNavigationContainerRef} from '@react-navigation/native';
+import type {NavigationState} from '@react-navigation/native';
 import {HeaderStyleInterpolators, TransitionPresets, createStackNavigator} from '@react-navigation/stack';
 import {useFlipper} from '@react-navigation/devtools';
 import {useAppearance} from '@/utils/appearance';
+import {useAccessToken} from '@/utils/httpClient';
+import {usePassQr} from '@/utils/passQr';
 import {Home, HeaderRight} from '@/screen/Home';
 import {Settings} from '@/screen/Settings';
 import {Welcome} from './screen/Welcome';
@@ -14,10 +17,12 @@ import {About} from '@/screen/About';
 const {Navigator, Screen} = createStackNavigator();
 
 function AppStack() {
+  const {navigationTheme} = useAppearance();
   const navigationRef = useNavigationContainerRef();
   useFlipper(navigationRef);
 
-  const {navigationTheme} = useAppearance();
+  const {accessToken} = useAccessToken();
+  const {getPassQr} = usePassQr();
 
   return (
     <NavigationContainer ref={navigationRef} theme={navigationTheme} onReady={() => RNBootSplash.hide()}>
@@ -35,6 +40,15 @@ function AppStack() {
           gestureEnabled: true,
           ...TransitionPresets.SlideFromRightIOS,
           headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
+        }}
+        screenListeners={{
+          state: (event: {data?: {state?: NavigationState}}) => {
+            if (event.data?.state?.routes.at(-1)?.name === 'Home') {
+              if (accessToken.length > 0) {
+                getPassQr();
+              }
+            }
+          },
         }}>
         <Screen
           name="Home"

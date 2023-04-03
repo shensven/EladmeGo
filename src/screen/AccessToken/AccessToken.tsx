@@ -26,7 +26,6 @@ function AccessToken() {
       })
       .then((resp: AxiosResponse<{code: number; message: string; result: []}>) => {
         const {data} = resp;
-
         switch (data.code) {
           case 0:
             const {exp}: {exp: number} = jwtDecode(form.accessToken);
@@ -73,6 +72,7 @@ function AccessToken() {
         multiline={false}
         numberOfLines={1}
         label="Access Token"
+        value={form.accessToken}
         secureTextEntry={form.secureTextEntry}
         right={
           <TextInput.Icon
@@ -80,7 +80,6 @@ function AccessToken() {
             onPress={() => setForm({...form, secureTextEntry: !form.secureTextEntry})}
           />
         }
-        value={form.accessToken}
         onChangeText={event => setForm({...form, accessToken: event})}
       />
       <Button mode="contained" style={{borderRadius: 12, marginTop: 24}} onPress={submit}>
