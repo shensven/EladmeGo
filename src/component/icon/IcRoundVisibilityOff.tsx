@@ -14,4 +14,5 @@ function IcRoundVisibilityOff(props: Props) {
     </Svg>
   );
 }
+
 export default IcRoundVisibilityOff;

@@ -37,7 +37,14 @@ const useAppearance = () => {
     }
   };
 
-  return {themeScheme, statusBarStyle, paperTheme, navigationTheme, setAppearance, setStatusBarStyle};
+  return {
+    themeScheme,
+    statusBarStyle,
+    paperTheme,
+    navigationTheme,
+    setAppearance,
+    setStatusBarStyle,
+  };
 };
 
 export default useAppearance;
