@@ -14,7 +14,7 @@ declare const global: {
 
 const screenHeight = Dimensions.get('screen').height;
 
-function Aouut() {
+function About() {
   const insets = useSafeAreaInsets();
   const {colors} = useTheme();
 
@@ -47,4 +47,4 @@ function Aouut() {
   );
 }
 
-export default Aouut;
+export default About;

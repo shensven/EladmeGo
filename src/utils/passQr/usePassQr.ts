@@ -25,10 +25,11 @@ const usePassQr = () => {
 
     if (resp.data.code === 0) {
       setPassQr(resp.data.result);
+      return resp.data.result;
     }
   };
 
-  return {passQr, getPassQr};
+  return {passQr, setPassQr, getPassQr};
 };
 
 export default usePassQr;

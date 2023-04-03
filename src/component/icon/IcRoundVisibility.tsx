@@ -5,7 +5,6 @@ type Props = {size?: number; color?: string};
 
 function IcRoundVisibility(props: Props) {
   const {size = 24, color = '#000'} = props;
-
   return (
     <Svg width={size} height={size} color={color} viewBox="0 0 24 24" {...props}>
       <Path
@@ -15,4 +14,5 @@ function IcRoundVisibility(props: Props) {
     </Svg>
   );
 }
+
 export default IcRoundVisibility;

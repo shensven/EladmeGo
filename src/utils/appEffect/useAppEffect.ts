@@ -1,20 +1,14 @@
-import {useEffect, useLayoutEffect} from 'react';
-import {useAccessToken} from '@/utils/httpClient';
-import {usePassQr} from '@/utils/passQr';
+import {useEffect} from 'react';
+import {useColorScheme} from 'react-native';
+import {useAppearance} from '@/utils/appearance';
 
 const useAppEffect = () => {
-  const {accessToken, restoreAccessToken} = useAccessToken();
-  const {getPassQr} = usePassQr();
-
-  useLayoutEffect(() => {
-    restoreAccessToken();
-  }, []);
+  const rnColorScheme = useColorScheme();
+  const {themeScheme, setAppearance} = useAppearance();
 
   useEffect(() => {
-    if (accessToken.length > 0) {
-      getPassQr();
-    }
-  }, [accessToken]);
+    setAppearance(themeScheme);
+  }, [rnColorScheme]);
 };
 
 export default useAppEffect;

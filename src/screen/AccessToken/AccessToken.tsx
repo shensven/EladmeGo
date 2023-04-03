@@ -10,7 +10,7 @@ import dayjs from 'dayjs';
 
 function AccessToken() {
   const {paperTheme} = useAppearance();
-  const {accessToken, storeAccessToken, clearAccessToken} = useAccessToken();
+  const {accessToken, setAccessToken, clearAccessToken} = useAccessToken();
 
   const [form, setForm] = useState({
     accessToken,
@@ -30,7 +30,7 @@ function AccessToken() {
           case 0:
             const {exp}: {exp: number} = jwtDecode(form.accessToken);
             Alert.alert('验证成功', `过期时间👉 ${dayjs.unix(exp).format('YYYY-MM-DD HH:mm:ss')}`);
-            storeAccessToken(form.accessToken);
+            setAccessToken(form.accessToken);
             break;
           case 401:
             Alert.alert('验证失败', data.message);
