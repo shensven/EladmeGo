@@ -1,11 +1,10 @@
 import React from 'react';
-import {Linking, Platform} from 'react-native';
+import {Linking} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import type {StackScreenProps} from '@react-navigation/stack';
 import {useTheme} from 'react-native-paper';
 import {
   IcRoundAdminPanelSettings,
-  IcRoundAutoAwesome,
   IcRoundBugReport,
   IcRoundChevronRight,
   IcRoundCode,
@@ -37,14 +36,12 @@ const useData = () => {
     onPress: () => void;
   }[] = [];
 
-  if (Platform.OS === 'ios') {
-    initData.push({
-      title: '欢迎',
-      leftIcon: <IcRoundAutoAwesome color={color(colors.onBackground).alpha(0.9).toString()} />,
-      rightIcon: <IcRoundChevronRight color={color(colors.onBackground).alpha(0.7).toString()} />,
-      onPress: () => navigation.navigate('Welcome'),
-    });
-  }
+  // initData.push({
+  //   title: '欢迎',
+  //   leftIcon: <IcRoundAutoAwesome color={color(colors.onBackground).alpha(0.9).toString()} />,
+  //   rightIcon: <IcRoundChevronRight color={color(colors.onBackground).alpha(0.7).toString()} />,
+  //   onPress: () => navigation.navigate('Welcome'),
+  // });
 
   const data = [
     ...initData,

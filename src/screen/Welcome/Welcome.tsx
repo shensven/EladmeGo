@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {View, Image, Dimensions, useColorScheme, Platform} from 'react-native';
+import {View, Image, Dimensions, useColorScheme} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
 import {useAppearance} from '@/utils/appearance';
 
@@ -32,23 +32,8 @@ function Welcome() {
   }, [isFocused]);
 
   return (
-    <View style={{flex: 1, alignItems: 'center', marginTop: screenHeight / 2 - 114}}>
-      {Platform.OS === 'ios' && (
-        <Image source={require('@/assets/splash/bootsplash.png')} style={{width: 288, height: 288}} />
-      )}
-      {Platform.OS === 'android' && (
-        <View
-          style={{
-            width: 192,
-            height: 192,
-            borderRadius: 96,
-            overflow: 'hidden',
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <Image source={require('@/assets/splash/bootsplash.png')} style={{width: 288, height: 288}} />
-        </View>
-      )}
+    <View style={{flex: 1, alignItems: 'center', marginTop: screenHeight / 2 - 160}}>
+      <Image source={require('@/assets/splash/bootsplash.png')} style={{width: 240, height: 240}} />
     </View>
   );
 }

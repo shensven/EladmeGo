@@ -27,8 +27,8 @@ function About() {
     <View style={{flex: 1, justifyContent: 'space-between', alignItems: 'center', paddingBottom: insets.bottom}}>
       <View style={{alignItems: 'center', height: screenHeight * 0.75}}>
         <Image
-          source={require('@/assets/appIcon/AppIcon.png')}
-          style={{width: 68, height: 68, marginTop: 40, marginBottom: 8}}
+          source={require('@/assets/appIcon/AppIcon180w.png')}
+          style={{width: 90, height: 90, marginTop: 40, marginBottom: 8}}
         />
 
         <Text variant="titleMedium" style={{color: colors.primary}}>

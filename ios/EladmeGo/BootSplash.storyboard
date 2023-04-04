@@ -17,14 +17,14 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="BootSplashLogo" translatesAutoresizingMaskIntoConstraints="NO" id="3lX-Ut-9ad">
-                                <rect key="frame" x="43.5" y="189.5" width="288" height="288"/>
+                                <rect key="frame" x="67.5" y="213.5" width="240" height="240"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" image="YES" notEnabled="YES"/>
                                 </accessibility>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Bcu-3y-fUS"/>
-                        <color key="backgroundColor" red="0.964705882352941" green="0.952941176470588" blue="0.941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.949019607843137" green="0.909803921568627" blue="0.886274509803922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <accessibility key="accessibilityConfiguration">
                             <accessibilityTraits key="traits" notEnabled="YES"/>
                         </accessibility>
@@ -40,6 +40,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BootSplashLogo" width="288" height="288"/>
+        <image name="BootSplashLogo" width="240" height="240"/>
     </resources>
 </document>
