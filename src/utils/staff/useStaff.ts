@@ -23,7 +23,7 @@ const useStaff = () => {
   };
 
   const resetStaff = () => {
-    setIsStaff({isStaff: 0, custom: 0, isBind: 0});
+    setIsStaff({isStaff: -1, custom: -1, isBind: -1});
   };
 
   return {isStaff, verifyStaff, resetStaff};

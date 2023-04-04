@@ -15,8 +15,8 @@ const paperThemeAtom = atom<MD3Theme>(paperLightTheme);
 const navigationThemeAtom = atom<NavigationTheme>(navigationLightTheme);
 
 const accessTokenAtom = atomWithStorage<string>('accessToken', '', storage);
-const is401StatusAtom = atom(true);
-const isStaffAtom = atom({isStaff: 0, custom: 0, isBind: 0});
+const is401StatusAtom = atom(false);
+const isStaffAtom = atom({isStaff: -1, custom: -1, isBind: -1});
 const passQrAtom = atom<PassQr | undefined>(undefined);
 
 export {

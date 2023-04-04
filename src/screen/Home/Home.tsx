@@ -39,12 +39,14 @@ function Home() {
     const resp = await getPassQr(accessToken);
     const {data} = resp;
     if (data.code === 0) {
+      setIs401Status(false);
       setCountdown(data.result.minute ?? 0);
       setIsRefrashLoading(false);
     }
     if (data.code === 401) {
-      setCountdown(0);
       setIs401Status(true);
+      setCountdown(0);
+      setIsRefrashLoading(false);
       setPassQr(undefined);
     }
 
@@ -122,7 +124,7 @@ function Home() {
           <Text> 仅对入驻企业员工开放</Text>
         </View>
       )}
-      {isStaff.isStaff === 1 && !is401Status && (
+      {isStaff.isStaff === 1 && !is401Status && passQr && (
         <>
           <View style={{height: 48, justifyContent: 'flex-end'}}>
             <Text>{passQr?.enterprise_name}</Text>
