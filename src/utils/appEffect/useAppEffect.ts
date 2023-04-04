@@ -3,13 +3,14 @@ import {useColorScheme} from 'react-native';
 import {useUpdateEffect} from 'ahooks';
 import {useAppearance} from '@/utils/appearance';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useActive} from '@/utils/httpClient';
+import {useAccessToken, useActive} from '@/utils/httpClient';
 import {useStaff} from '@/utils/staff';
 
 const useAppEffect = () => {
   const rnColorScheme = useColorScheme();
   const {themeScheme, setAppearance} = useAppearance();
   const verifyActive = useActive();
+  const {setIs401Status} = useAccessToken();
   const {verifyStaff} = useStaff();
 
   useLayoutEffect(() => {
@@ -21,7 +22,11 @@ const useAppEffect = () => {
     AsyncStorage.getItem('accessToken').then(storageAccessToken => {
       const parsedAccessToken = JSON.parse(storageAccessToken || 'null');
       if (parsedAccessToken) {
-        verifyActive(parsedAccessToken);
+        verifyActive(parsedAccessToken).then(resp => {
+          if (resp.data.code === 401) {
+            setIs401Status(true);
+          }
+        });
         verifyStaff(parsedAccessToken);
       }
     });

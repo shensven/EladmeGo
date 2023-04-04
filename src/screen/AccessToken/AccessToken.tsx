@@ -10,7 +10,7 @@ import dayjs from 'dayjs';
 
 function AccessToken() {
   const {paperTheme} = useAppearance();
-  const {accessToken, setAccessToken, clearAccessToken} = useAccessToken();
+  const {accessToken, setAccessToken, clearAccessToken, setIs401Status} = useAccessToken();
   const verifyActive = useActive();
   const {verifyStaff, resetStaff} = useStaff();
 
@@ -27,10 +27,12 @@ function AccessToken() {
           const {exp}: {exp: number} = jwtDecode(form.accessToken);
           Alert.alert('验证成功', `过期时间👉 ${dayjs.unix(exp).format('YYYY-MM-DD HH:mm:ss')}`);
           setAccessToken(form.accessToken);
+          setIs401Status(false);
           verifyStaff(form.accessToken);
           break;
         case 401:
           Alert.alert('验证失败', message);
+          setIs401Status(true);
           break;
         default:
           Alert.alert('验证失败');

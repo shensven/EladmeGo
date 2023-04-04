@@ -23,9 +23,9 @@ function Home() {
 
   const {paperTheme} = useAppearance();
 
-  const {accessToken} = useAccessToken();
+  const {accessToken, is401Status, setIs401Status} = useAccessToken();
   const {isStaff} = useStaff();
-  const {passQr, getPassQr} = usePassQr();
+  const {passQr, getPassQr, setPassQr} = usePassQr();
 
   const [passCategory, setPassCategory] = useState('qrcode');
 
@@ -34,12 +34,21 @@ function Home() {
 
   const [isInitShow, setIsInitShow] = useState(false);
 
-  const setCountdownViaPassQrGot = () => {
+  const setCountdownViaPassQrGot = async () => {
     setIsRefrashLoading(true);
-    getPassQr(accessToken).then(resp => {
-      setCountdown(resp?.minute ?? 0);
+    const resp = await getPassQr(accessToken);
+    const {data} = resp;
+    if (data.code === 0) {
+      setCountdown(data.result.minute ?? 0);
       setIsRefrashLoading(false);
-    });
+    }
+    if (data.code === 401) {
+      setCountdown(0);
+      setIs401Status(true);
+      setPassQr(undefined);
+    }
+
+    return resp;
   };
 
   useEffect(() => {
@@ -56,12 +65,17 @@ function Home() {
   }, [accessToken]);
 
   useEffect(() => {
-    if (isStaff.isStaff === 1) {
+    if (isStaff.isStaff === 1 && !is401Status) {
       const timer = setInterval(() => {
         setCountdown(prev => {
           console.log('prev', prev);
           if (prev <= 0) {
-            setCountdownViaPassQrGot();
+            setCountdownViaPassQrGot().then(resp => {
+              const {data} = resp;
+              if (data.code === 401) {
+                clearInterval(timer);
+              }
+            });
             return 0;
           } else {
             return prev - 1;
@@ -70,7 +84,7 @@ function Home() {
       }, 1000);
       return () => clearInterval(timer);
     }
-  }, [isStaff, passQr]);
+  }, [isStaff, passQr, is401Status]);
 
   return (
     <View style={{flex: 1, alignItems: 'center'}}>
@@ -81,7 +95,18 @@ function Home() {
           </Button>
         </View>
       )}
-      {accessToken.length > 0 && (
+      {accessToken.length > 0 && is401Status && (
+        <View style={{justifyContent: 'center', alignItems: 'center', marginTop: 16}}>
+          <Button mode="contained-tonal" onPress={() => navigation.navigate('AccessToken')}>
+            验证 Access Token 以启用通行证
+          </Button>
+
+          <View style={{height: 48, justifyContent: 'flex-end'}}>
+            <Text> Access Token 已过期</Text>
+          </View>
+        </View>
+      )}
+      {accessToken.length > 0 && !is401Status && (
         <SegmentedButtons
           value={passCategory}
           onValueChange={setPassCategory}
@@ -92,12 +117,12 @@ function Home() {
           style={{width: screenWidth / 1.5 + 24, marginTop: 16}}
         />
       )}
-      {accessToken.length > 0 && isStaff.isStaff === 0 && (
+      {accessToken.length > 0 && !is401Status && isStaff.isStaff === 0 && (
         <View style={{height: 48, justifyContent: 'flex-end'}}>
           <Text> 仅对入驻企业员工开放</Text>
         </View>
       )}
-      {isStaff.isStaff === 1 && (
+      {isStaff.isStaff === 1 && !is401Status && (
         <>
           <View style={{height: 48, justifyContent: 'flex-end'}}>
             <Text>{passQr?.enterprise_name}</Text>
