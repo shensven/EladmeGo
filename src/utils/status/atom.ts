@@ -10,9 +10,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const storage: any = createJSONStorage(() => AsyncStorage);
 
 const themeSchemeAtom = atomWithStorage<'light' | 'dark' | 'system'>('themeScheme', 'system', storage);
-const statusBarStyleAtom = atomWithStorage<SystemBarStyle>('statusBarStyle', 'dark-content', storage);
-const paperThemeAtom = atomWithStorage<MD3Theme>('paperTheme', paperLightTheme, storage);
-const navigationThemeAtom = atomWithStorage<NavigationTheme>('navigationTheme', navigationLightTheme, storage);
+const statusBarStyleAtom = atom<SystemBarStyle>('dark-content');
+const paperThemeAtom = atom<MD3Theme>(paperLightTheme);
+const navigationThemeAtom = atom<NavigationTheme>(navigationLightTheme);
 
 const accessTokenAtom = atomWithStorage<string>('accessToken', '', storage);
 const passQrAtom = atom<PassQr | undefined>(undefined);

@@ -4,7 +4,7 @@ import {navigationThemeAtom, paperThemeAtom, statusBarStyleAtom, themeSchemeAtom
 import {navigationDarkTheme, navigationLightTheme, paperDarkTheme, paperLightTheme} from './colorToken';
 
 const useAppearance = () => {
-  const colorScheme = useColorScheme();
+  const rnColorScheme = useColorScheme();
 
   const [themeScheme, setThemeSchemeAtom] = useAtom(themeSchemeAtom);
   const [statusBarStyle, setStatusBarStyle] = useAtom(statusBarStyleAtom);
@@ -26,9 +26,9 @@ const useAppearance = () => {
         setThemeSchemeAtom('dark');
         break;
       case 'system':
-        setPaperTheme(colorScheme === 'dark' ? paperDarkTheme : paperLightTheme);
-        setNavigationTheme(colorScheme === 'dark' ? navigationDarkTheme : navigationLightTheme);
-        setStatusBarStyle(colorScheme === 'dark' ? 'light-content' : 'dark-content');
+        setPaperTheme(rnColorScheme === 'dark' ? paperDarkTheme : paperLightTheme);
+        setNavigationTheme(rnColorScheme === 'dark' ? navigationDarkTheme : navigationLightTheme);
+        setStatusBarStyle(rnColorScheme === 'dark' ? 'light-content' : 'dark-content');
         setThemeSchemeAtom('system');
         break;
       default:
