@@ -11,6 +11,7 @@ import {
   IcRoundColorLens,
   IcRoundInfo,
   IcRoundOpenInNew,
+  IcRoundWaterfallChart,
 } from '@/component/icon';
 import color from 'color';
 
@@ -50,6 +51,12 @@ const useData = () => {
       leftIcon: <IcRoundAdminPanelSettings color={color(colors.onBackground).alpha(0.9).toString()} />,
       rightIcon: <IcRoundChevronRight color={color(colors.onBackground).alpha(0.7).toString()} />,
       onPress: () => navigation.navigate('AccessToken'),
+    },
+    {
+      title: '最近请求',
+      leftIcon: <IcRoundWaterfallChart color={color(colors.onBackground).alpha(0.9).toString()} />,
+      rightIcon: <IcRoundChevronRight color={color(colors.onBackground).alpha(0.7).toString()} />,
+      onPress: () => {},
     },
     {
       title: '外观',

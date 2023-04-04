@@ -16,3 +16,6 @@ export {default as IcRoundShare} from './IcRoundShare';
 export {default as IcRoundShield} from './IcRoundShield';
 export {default as IcRoundVisibilityOff} from './IcRoundVisibilityOff';
 export {default as IcRoundVisibility} from './IcRoundVisibility';
+export {default as IcRoundWaterfallChart} from './IcRoundWaterfallChart';
+export {default as IcRoundShareArrivalTime} from './IcRoundShareArrivalTime';
+export {default as IcRoundNoAdultContent} from './IcRoundNoAdultContent';

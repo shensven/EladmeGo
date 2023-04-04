@@ -4,7 +4,7 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import {IconButton} from 'react-native-paper';
 import {useAppearance} from '@/utils/appearance';
-import {IcRoundMoreHoriz, IcRoundMoreVert} from '@/component/icon';
+import {IcRoundMoreHoriz, IcRoundMoreVert, IcRoundShareArrivalTime} from '@/component/icon';
 
 type StackParamList = {
   Settings: undefined;
@@ -15,6 +15,10 @@ function HeaderRight() {
   const navigation = useNavigation<ScreenNavigationProp>();
   const {navigationTheme} = useAppearance();
 
+  const IconButtonShare = useCallback(
+    () => <IcRoundShareArrivalTime color={navigationTheme.colors.text} />,
+    [navigationTheme.dark],
+  );
   const IconButtonMore = useCallback(
     () => (
       <>
@@ -27,6 +31,7 @@ function HeaderRight() {
 
   return (
     <View style={{flexDirection: 'row', alignItems: 'center'}}>
+      <IconButton icon={IconButtonShare} onPress={() => {}} />
       <IconButton icon={IconButtonMore} onPress={() => navigation.navigate('Settings')} />
     </View>
   );

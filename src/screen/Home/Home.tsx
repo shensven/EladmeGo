@@ -80,7 +80,7 @@ function Home() {
         <>
           <InitView />
           <View style={{height: 48, justifyContent: 'flex-end'}}>
-            <Text> Access Token 已过期</Text>
+            <Text> Access Token 已失效</Text>
           </View>
         </>
       )}
