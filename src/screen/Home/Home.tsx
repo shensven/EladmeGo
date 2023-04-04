@@ -1,53 +1,39 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, Dimensions, Image, View} from 'react-native';
-import {Button, SegmentedButtons, Text, TouchableRipple} from 'react-native-paper';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {ActivityIndicator, Dimensions, View} from 'react-native';
+import {SegmentedButtons, Text} from 'react-native-paper';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useNavigation} from '@react-navigation/native';
-import type {StackScreenProps} from '@react-navigation/stack';
-import Color from 'color';
-import {useAppearance} from '@/utils/appearance';
 import {useAccessToken} from '@/utils/httpClient';
 import {useStaff} from '@/utils/staff';
 import {usePassQr} from '@/utils/passQr';
-
-type StackParamList = {
-  AccessToken: undefined;
-};
-type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
+import InitView from './InitView';
+import PassQrView from './PassQrView';
+import BottomButton from './BottomButton';
 
 function Home() {
   const screenWidth = Dimensions.get('screen').width;
-  const insets = useSafeAreaInsets();
-  const navigation = useNavigation<ScreenNavigationProp>();
-
-  const {paperTheme} = useAppearance();
 
   const {accessToken, is401Status, setIs401Status} = useAccessToken();
   const {isStaff} = useStaff();
-  const {passQr, getPassQr, setPassQr} = usePassQr();
-
-  const [passCategory, setPassCategory] = useState('qrcode');
-
-  const [countdown, setCountdown] = useState(0);
-  const [isRefrashLoading, setIsRefrashLoading] = useState(false);
+  const {passQr, getPassQr, resetPassQr} = usePassQr();
 
   const [isInitShow, setIsInitShow] = useState(false);
+
+  const [passCategory, setPassCategory] = useState('qrcode');
+  const [countdown, setCountdown] = useState(0);
+  const [isRefrashLoading, setIsRefrashLoading] = useState(false);
 
   const setCountdownViaPassQrGot = async () => {
     setIsRefrashLoading(true);
     const resp = await getPassQr(accessToken);
     const {data} = resp;
     if (data.code === 0) {
-      setIs401Status(false);
       setCountdown(data.result.minute ?? 0);
       setIsRefrashLoading(false);
     }
     if (data.code === 401) {
-      setIs401Status(true);
       setCountdown(0);
-      setIsRefrashLoading(false);
-      setPassQr(undefined);
+      setIs401Status(true);
+      resetPassQr();
     }
 
     return resp;
@@ -70,11 +56,10 @@ function Home() {
     if (isStaff.isStaff === 1 && !is401Status) {
       const timer = setInterval(() => {
         setCountdown(prev => {
-          console.log('prev', prev);
+          console.log('prevCountdown', prev);
           if (prev <= 0) {
             setCountdownViaPassQrGot().then(resp => {
-              const {data} = resp;
-              if (data.code === 401) {
+              if (resp.data.code === 401) {
                 clearInterval(timer);
               }
             });
@@ -90,25 +75,16 @@ function Home() {
 
   return (
     <View style={{flex: 1, alignItems: 'center'}}>
-      {isInitShow && (
-        <View style={{justifyContent: 'center', alignItems: 'center', marginTop: 16}}>
-          <Button mode="contained-tonal" onPress={() => navigation.navigate('AccessToken')}>
-            验证 Access Token 以启用通行证
-          </Button>
-        </View>
-      )}
+      {isInitShow && <InitView />}
       {accessToken.length > 0 && is401Status && (
-        <View style={{justifyContent: 'center', alignItems: 'center', marginTop: 16}}>
-          <Button mode="contained-tonal" onPress={() => navigation.navigate('AccessToken')}>
-            验证 Access Token 以启用通行证
-          </Button>
-
+        <>
+          <InitView />
           <View style={{height: 48, justifyContent: 'flex-end'}}>
             <Text> Access Token 已过期</Text>
           </View>
-        </View>
+        </>
       )}
-      {accessToken.length > 0 && !is401Status && (
+      {accessToken.length > 0 && !is401Status && isStaff.isStaff !== -1 && (
         <SegmentedButtons
           value={passCategory}
           onValueChange={setPassCategory}
@@ -124,72 +100,19 @@ function Home() {
           <Text> 仅对入驻企业员工开放</Text>
         </View>
       )}
+      {isStaff.isStaff === 1 && !is401Status && !passQr && (
+        <View style={{height: 48, justifyContent: 'flex-end'}}>
+          <ActivityIndicator animating={isRefrashLoading} />
+        </View>
+      )}
       {isStaff.isStaff === 1 && !is401Status && passQr && (
         <>
-          <View style={{height: 48, justifyContent: 'flex-end'}}>
-            <Text>{passQr?.enterprise_name}</Text>
-          </View>
-          <View
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              width: screenWidth / 1.5 + 24,
-              height: screenWidth / 1.5 + 24,
-              backgroundColor: '#fff',
-              borderRadius: 24,
-              marginTop: 12,
-            }}>
-            <Image source={{uri: passQr?.qrCode}} style={{width: screenWidth / 1.5, height: screenWidth / 1.5}} />
-          </View>
-          <View style={{height: 24, justifyContent: 'flex-end'}}>
-            {passQr && (
-              <Text variant="bodySmall" style={{color: Color(paperTheme.colors.onBackground).alpha(0.45).hexa()}}>
-                {countdown} 秒后自动刷新
-              </Text>
-            )}
-          </View>
-          <TouchableRipple
-            borderless
-            disabled={isRefrashLoading}
-            style={{marginTop: 16, borderRadius: 8}}
-            onPress={() => setCountdownViaPassQrGot()}>
-            <View
-              style={{
-                height: 32,
-                width: 80,
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: isRefrashLoading
-                  ? Color(paperTheme.colors.onSurfaceVariant).alpha(0.06).hexa()
-                  : Color(paperTheme.colors.tertiaryContainer).alpha(0.7).hexa(),
-              }}>
-              {isRefrashLoading && (
-                <ActivityIndicator
-                  animating={isRefrashLoading}
-                  color={Color(paperTheme.colors.onTertiaryContainer).alpha(0.25).hexa()}
-                />
-              )}
-              {!isRefrashLoading && <Text variant="bodySmall">立即刷新</Text>}
-            </View>
-          </TouchableRipple>
-
-          <View style={{position: 'absolute', bottom: 32 + insets.bottom}}>
-            <Text variant="bodySmall" style={{color: paperTheme.colors.onBackground, alignSelf: 'center'}}>
-              {passQr?.floor_name}
-            </Text>
-            <Button
-              mode="contained"
-              theme={{
-                colors: {
-                  primary: paperTheme.colors.onBackground,
-                },
-              }}
-              style={{marginTop: 8, borderRadius: 16, justifyContent: 'center', alignItems: 'center'}}
-              contentStyle={{width: screenWidth / 1.5 + 24}}
-              onPress={() => {}}>
-              选择楼层
-            </Button>
-          </View>
+          <PassQrView
+            countdown={countdown}
+            isRefrashLoading={isRefrashLoading}
+            onPress={() => setCountdownViaPassQrGot()}
+          />
+          <BottomButton />
         </>
       )}
     </View>

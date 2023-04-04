@@ -33,7 +33,11 @@ const usePassQr = () => {
     return resp;
   };
 
-  return {passQr, setPassQr, getPassQr};
+  const resetPassQr = () => {
+    setPassQr(undefined);
+  };
+
+  return {passQr, getPassQr, resetPassQr};
 };
 
 export default usePassQr;
