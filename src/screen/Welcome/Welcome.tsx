@@ -25,8 +25,8 @@ function Welcome() {
           setStatusBarStyle(colorScheme === 'dark' ? 'light-content' : 'dark-content');
           break;
         default:
-          const _: never = themeScheme;
-          throw new Error('Unexpected themeScheme: ' + _);
+          const n: never = themeScheme;
+          throw new Error('Unexpected themeScheme: ' + n);
       }
     }
   }, [isFocused]);

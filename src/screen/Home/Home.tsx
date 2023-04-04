@@ -56,7 +56,7 @@ function Home() {
     if (accessToken && accessToken.length > 0) {
       const timer = setInterval(() => {
         setCountdown(prev => {
-          console.log('prev', prev);
+          // console.log('prev', prev);
           if (prev <= 0) {
             setCountdownViaPassQrGot();
             return 0;

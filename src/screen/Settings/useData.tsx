@@ -1,5 +1,5 @@
 import React from 'react';
-import {Linking} from 'react-native';
+import {Linking, Platform} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import type {StackScreenProps} from '@react-navigation/stack';
 import {useTheme} from 'react-native-paper';
@@ -29,13 +29,25 @@ const useData = () => {
   const {colors} = useTheme();
   const navigation = useNavigation<ScreenNavigationProp>();
 
-  const data = [
-    {
+  let initData: {
+    title: string;
+    description?: string;
+    leftIcon: React.ReactElement;
+    rightIcon: React.ReactElement;
+    onPress: () => void;
+  }[] = [];
+
+  if (Platform.OS === 'ios') {
+    initData.push({
       title: '欢迎',
       leftIcon: <IcRoundAutoAwesome color={color(colors.onBackground).alpha(0.9).toString()} />,
       rightIcon: <IcRoundChevronRight color={color(colors.onBackground).alpha(0.7).toString()} />,
       onPress: () => navigation.navigate('Welcome'),
-    },
+    });
+  }
+
+  const data = [
+    ...initData,
     {
       title: '访问令牌',
       leftIcon: <IcRoundAdminPanelSettings color={color(colors.onBackground).alpha(0.9).toString()} />,
