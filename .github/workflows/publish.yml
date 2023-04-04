@@ -1,0 +1,104 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.ref }}
+
+jobs:
+  get-semantic-version:
+    if: ${{ github.repository_owner == 'shensven' }}
+    runs-on: ubuntu-latest
+    outputs:
+      SEMANTIC_VERSION: ${{ steps.console-semantic-version.outputs.SEMANTIC_VERSION }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Console semantic version
+        id: console-semantic-version
+        run: |
+          SEMANTIC_VERSION=$(node -e "console.log(require('./package.json').version)")
+          echo "SEMANTIC_VERSION=$SEMANTIC_VERSION" >> $GITHUB_OUTPUT
+
+  publish_android:
+    name: Publish Android
+    needs: get-semantic-version
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: 11
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Restore Gradle cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/android/*.gradle', '**/android/*.properties', '**/android/gradle/wrapper/gradle-wrapper.properties', '**/android/app/*.gradle') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Restore node_modules
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Setting up Gradle variables
+        run: |
+          cd android
+          echo "MYAPP_UPLOAD_STORE_PASSWORD=${{ secrets.MYAPP_UPLOAD_STORE_PASSWORD }}" >> gradle.properties
+          echo "MYAPP_UPLOAD_KEY_PASSWORD=${{ secrets.MYAPP_UPLOAD_KEY_PASSWORD }}" >> gradle.properties
+
+      - name: Restore jks
+        run: |
+          cd android/app
+          echo -n "${{ secrets.RELEASE_KEYSTORE_BASE64 }}" | base64 --decode > release.keystore
+
+      - name: Release for Android
+        env:
+          VERSION_CODE: ${{ github.run_number }}
+          VERSION_NAME: ${{ needs.get-semantic-version.outputs.SEMANTIC_VERSION }}
+        run: |
+          cd android 
+          chmod +x gradlew
+          ./gradlew assembleRelease
+
+      - uses: ncipollo/release-action@v1
+        with:
+          name: v${{ needs.get-semantic-version.outputs.SEMANTIC_VERSION }}
+          tag: v${{ needs.get-semantic-version.outputs.SEMANTIC_VERSION }}
+          allowUpdates: true
+          draft: true
+          artifacts: 'android/app/build/outputs/apk/release/*.*'
