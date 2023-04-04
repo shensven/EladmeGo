@@ -8,6 +8,7 @@ import type {StackScreenProps} from '@react-navigation/stack';
 import Color from 'color';
 import {useAppearance} from '@/utils/appearance';
 import {useAccessToken} from '@/utils/httpClient';
+import {useStaff} from '@/utils/staff';
 import {usePassQr} from '@/utils/passQr';
 
 type StackParamList = {
@@ -23,13 +24,23 @@ function Home() {
   const {paperTheme} = useAppearance();
 
   const {accessToken} = useAccessToken();
+  const {isStaff} = useStaff();
   const {passQr, getPassQr} = usePassQr();
+
   const [passCategory, setPassCategory] = useState('qrcode');
 
   const [countdown, setCountdown] = useState(0);
   const [isRefrashLoading, setIsRefrashLoading] = useState(false);
 
   const [isInitShow, setIsInitShow] = useState(false);
+
+  const setCountdownViaPassQrGot = () => {
+    setIsRefrashLoading(true);
+    getPassQr(accessToken).then(resp => {
+      setCountdown(resp?.minute ?? 0);
+      setIsRefrashLoading(false);
+    });
+  };
 
   useEffect(() => {
     AsyncStorage.getItem('accessToken').then(accessTokenValue => {
@@ -44,19 +55,11 @@ function Home() {
     });
   }, [accessToken]);
 
-  const setCountdownViaPassQrGot = () => {
-    setIsRefrashLoading(true);
-    getPassQr().then(resp => {
-      setCountdown(resp?.minute ?? 0);
-      setIsRefrashLoading(false);
-    });
-  };
-
   useEffect(() => {
-    if (accessToken && accessToken.length > 0) {
+    if (isStaff.isStaff === 1) {
       const timer = setInterval(() => {
         setCountdown(prev => {
-          // console.log('prev', prev);
+          console.log('prev', prev);
           if (prev <= 0) {
             setCountdownViaPassQrGot();
             return 0;
@@ -67,7 +70,7 @@ function Home() {
       }, 1000);
       return () => clearInterval(timer);
     }
-  }, [accessToken, passQr]);
+  }, [isStaff, passQr]);
 
   return (
     <View style={{flex: 1, alignItems: 'center'}}>
@@ -79,16 +82,23 @@ function Home() {
         </View>
       )}
       {accessToken.length > 0 && (
+        <SegmentedButtons
+          value={passCategory}
+          onValueChange={setPassCategory}
+          buttons={[
+            {label: '二维码通行', value: 'qrcode'},
+            {label: '蓝牙通行', value: 'ble'},
+          ]}
+          style={{width: screenWidth / 1.5 + 24, marginTop: 16}}
+        />
+      )}
+      {accessToken.length > 0 && isStaff.isStaff === 0 && (
+        <View style={{height: 48, justifyContent: 'flex-end'}}>
+          <Text> 仅对入驻企业员工开放</Text>
+        </View>
+      )}
+      {isStaff.isStaff === 1 && (
         <>
-          <SegmentedButtons
-            value={passCategory}
-            onValueChange={setPassCategory}
-            buttons={[
-              {label: '二维码通行', value: 'qrcode'},
-              {label: '蓝牙通行', value: 'ble'},
-            ]}
-            style={{width: screenWidth / 1.5 + 24, marginTop: 16}}
-          />
           <View style={{height: 48, justifyContent: 'flex-end'}}>
             <Text>{passQr?.enterprise_name}</Text>
           </View>

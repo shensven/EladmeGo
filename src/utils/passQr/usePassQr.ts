@@ -1,7 +1,7 @@
 import {useAtom} from 'jotai';
-import {useAxios} from '@/utils/httpClient';
 import type {AxiosResponse} from 'axios';
 import {passQrAtom} from '@/utils/status/atom';
+import {axiosInstance} from '@/utils/httpClient';
 
 type PassQr = {
   common_floor: number[];
@@ -15,12 +15,16 @@ type PassQr = {
 };
 
 const usePassQr = () => {
-  const axios = useAxios();
   const [passQr, setPassQr] = useAtom(passQrAtom);
 
-  const getPassQr = async () => {
-    const resp: AxiosResponse<{code: number; message: string; result: PassQr}> = await axios.get(
+  const getPassQr = async (accessToken: string) => {
+    const resp: AxiosResponse<{code: number; message: string; result: PassQr}> = await axiosInstance.get(
       'member/v1/member/getPassQr',
+      {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      },
     );
 
     if (resp.data.code === 0) {

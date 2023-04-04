@@ -15,6 +15,15 @@ const paperThemeAtom = atom<MD3Theme>(paperLightTheme);
 const navigationThemeAtom = atom<NavigationTheme>(navigationLightTheme);
 
 const accessTokenAtom = atomWithStorage<string>('accessToken', '', storage);
+const isStaffAtom = atom({isStaff: 0, custom: 0, isBind: 0});
 const passQrAtom = atom<PassQr | undefined>(undefined);
 
-export {themeSchemeAtom, statusBarStyleAtom, paperThemeAtom, navigationThemeAtom, accessTokenAtom, passQrAtom};
+export {
+  themeSchemeAtom,
+  statusBarStyleAtom,
+  paperThemeAtom,
+  navigationThemeAtom,
+  accessTokenAtom,
+  isStaffAtom,
+  passQrAtom,
+};
