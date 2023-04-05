@@ -1,24 +1,25 @@
 import React from 'react';
 import {View} from 'react-native';
-import {Text, TouchableRipple, useTheme} from 'react-native-paper';
+import {Text, TouchableRipple} from 'react-native-paper';
+import {useAppearance} from '@/utils/appearance';
 
 type ItemProps = {
   title: string;
   leftIcon: React.ReactNode;
   rightIcon: React.ReactNode;
-  onPress: () => void;
+  onPress?: () => void;
 };
 
 function Item(props: ItemProps) {
   const {title, leftIcon, rightIcon, onPress} = props;
-  const {colors} = useTheme();
+  const {paperTheme} = useAppearance();
 
   return (
     <TouchableRipple style={{paddingHorizontal: 16, paddingVertical: 20}} onPress={onPress}>
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           {leftIcon}
-          <Text variant="titleMedium" style={{marginLeft: 16, color: colors.onBackground}}>
+          <Text variant="titleMedium" style={{marginLeft: 16, color: paperTheme.colors.onBackground}}>
             {title}
           </Text>
         </View>

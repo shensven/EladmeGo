@@ -5,7 +5,7 @@ import {useAppearance} from '@/utils/appearance';
 
 function Welcome() {
   const screenHeight = Dimensions.get('screen').height;
-  const colorScheme = useColorScheme();
+  const rnColorScheme = useColorScheme();
   const {themeScheme, setStatusBarStyle} = useAppearance();
 
   const isFocused = useIsFocused();
@@ -22,7 +22,7 @@ function Welcome() {
           setStatusBarStyle('light-content');
           break;
         case 'system':
-          setStatusBarStyle(colorScheme === 'dark' ? 'light-content' : 'dark-content');
+          setStatusBarStyle(rnColorScheme === 'dark' ? 'light-content' : 'dark-content');
           break;
         default:
           const n: never = themeScheme;
