@@ -5,6 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useAccessToken} from '@/utils/httpClient';
 import {useStaff} from '@/utils/staff';
 import {usePassQr} from '@/utils/passQr';
+import {DebugView} from '@/component/DebugView';
 import InitView from './InitView';
 import PassQrView from './PassQrView';
 import BottomButton from './BottomButton';
@@ -75,6 +76,7 @@ function Home() {
 
   return (
     <View style={{flex: 1, alignItems: 'center'}}>
+      {__DEV__ && <DebugView />}
       {isInitShow && <InitView />}
       {accessToken.length > 0 && is401Status && (
         <>
