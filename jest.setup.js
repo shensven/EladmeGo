@@ -1,20 +1,26 @@
 import {jest} from '@jest/globals';
+import mockBottomSheet from '@gorhom/bottom-sheet/mock';
 import mockRNDeviceInfo from 'react-native-device-info/jest/react-native-device-info-mock';
 
 jest.useFakeTimers();
 
 jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
 
-jest.mock('react-native-flipper', () => {
-  return {
-    addPlugin: jest.fn(),
-  };
-});
-
 jest.mock('react-native-reanimated', () => {
   const Reanimated = require('react-native-reanimated/mock');
   Reanimated.default.call = () => {};
   return Reanimated;
+});
+
+jest.mock('@gorhom/bottom-sheet', () => ({
+  ...mockBottomSheet,
+  __esModule: true,
+}));
+
+jest.mock('react-native-flipper', () => {
+  return {
+    addPlugin: jest.fn(),
+  };
 });
 
 jest.mock('react-native-device-info', () => mockRNDeviceInfo);
