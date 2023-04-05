@@ -76,7 +76,7 @@ function Home() {
         <>
           <InitView />
           <View style={{height: 48, justifyContent: 'flex-end'}}>
-            <Text> Access Token 已失效</Text>
+            <Text> Access Token 已失效 😵</Text>
           </View>
         </>
       )}
@@ -93,7 +93,7 @@ function Home() {
       )}
       {accessToken.length > 0 && !is401Status && isStaff.isStaff === 0 && (
         <View style={{height: 48, justifyContent: 'flex-end'}}>
-          <Text> 仅对入驻企业员工开放</Text>
+          <Text>仅对入驻企业员工开放 😢</Text>
         </View>
       )}
       {isStaff.isStaff === 1 && !is401Status && !passQr && (

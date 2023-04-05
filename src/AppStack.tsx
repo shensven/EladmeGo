@@ -26,9 +26,9 @@ function AppStack() {
       ref={navigationRef}
       theme={navigationTheme}
       onReady={() =>
-        RNBootSplash.hide({
-          fade: true,
-        })
+        setTimeout(() => {
+          RNBootSplash.hide({fade: true, duration: 320});
+        }, 1000)
       }>
       <Navigator
         initialRouteName="Home"

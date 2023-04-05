@@ -7,7 +7,7 @@ import {axiosInstance, useAccessToken} from '@/utils/httpClient';
 
 type PassQr = {
   common_floor: number[];
-  default_floor: number;
+  default_floor: string;
   elevator: number[];
   enterprise_name: string;
   floor_name: string;
@@ -51,7 +51,7 @@ const usePassQr = () => {
     if (data.code === 0) {
       setPassQr({...data.result, uuid: uuidv1()});
       setCountdown(data.result.minute ?? 0);
-      setLastFloorUsed(data.result.default_floor);
+      setLastFloorUsed(Number(data.result.default_floor));
     }
 
     if (data.code === 401) {

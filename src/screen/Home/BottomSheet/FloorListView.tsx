@@ -26,7 +26,9 @@ function FloorListView() {
         floor={item}
         onPress={() => {
           getPassQr(accessToken, item);
-          close();
+          setTimeout(() => {
+            close();
+          }, 300);
         }}
       />
     );
@@ -37,11 +39,12 @@ function FloorListView() {
       data={data}
       keyExtractor={item => item.toString()}
       renderItem={renderItem}
+      showsVerticalScrollIndicator={false}
       ListHeaderComponent={
         <Text
           variant="labelSmall"
           style={{
-            color: Color(paperTheme.colors.onSurface).alpha(0.5).toString(),
+            color: Color(paperTheme.colors.onBackground).alpha(0.5).hexa(),
             marginBottom: 8,
             marginLeft: 8,
           }}>
@@ -51,7 +54,6 @@ function FloorListView() {
       ListFooterComponent={<View />}
       ListFooterComponentStyle={{height: 8 + insets.bottom}}
       style={{paddingHorizontal: 24}}
-      contentContainerStyle={{}}
     />
   );
 }

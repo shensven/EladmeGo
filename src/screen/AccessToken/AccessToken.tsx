@@ -25,22 +25,22 @@ function AccessToken() {
       switch (code) {
         case 0:
           const {exp}: {exp: number} = jwtDecode(form.accessToken);
-          Alert.alert('验证成功', `过期时间👉 ${dayjs.unix(exp).format('YYYY-MM-DD HH:mm:ss')}`);
+          Alert.alert('验证成功🎉', `过期时间 ${dayjs.unix(exp).format('YYYY-MM-DD HH:mm:ss')}`);
           setAccessToken(form.accessToken);
           setIs401Status(false);
           verifyStaff(form.accessToken);
           break;
         case 401:
-          Alert.alert('验证失败', message);
+          Alert.alert('验证失败😵', message);
           break;
         default:
-          Alert.alert('验证失败');
+          Alert.alert('验证失败😵');
       }
     });
   };
 
   const clear = () => {
-    Alert.alert('再次确认', '确定要清除访问令牌吗？', [
+    Alert.alert('再次确认👋', '确定要清除访问令牌吗？', [
       {text: '取消'},
       {
         text: '确定',

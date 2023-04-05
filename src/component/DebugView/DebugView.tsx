@@ -12,7 +12,7 @@ function DebugView() {
       onPress={() => {
         expand();
       }}>
-      Debug
+      Debug 🔨
     </Button>
   );
 }
