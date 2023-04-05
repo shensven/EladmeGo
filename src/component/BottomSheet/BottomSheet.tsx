@@ -8,7 +8,9 @@ const BottomSheet = (props: PropsWithChildren<{}>) => {
   const {bottomSheetRef} = useBottomSheet();
 
   const renderBackdrop = useCallback(
-    (props: BottomSheetBackdropProps) => <BottomSheetBackdrop {...props} disappearsOnIndex={-1} />,
+    (bottomSheetBackdropProps: BottomSheetBackdropProps) => (
+      <BottomSheetBackdrop {...bottomSheetBackdropProps} disappearsOnIndex={-1} />
+    ),
     [],
   );
 
