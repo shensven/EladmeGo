@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, Dimensions, View} from 'react-native';
 import {SegmentedButtons, Text} from 'react-native-paper';
+import {useAtom} from 'jotai';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useAccessToken} from '@/utils/httpClient';
 import {useStaff} from '@/utils/staff';
 import {usePassQr} from '@/utils/passQr';
+import {countdownAtom} from '@/utils/status/atom';
 import {DebugView} from '@/component/DebugView';
 import InitView from './InitView';
 import PassQrView from './PassQrView';
@@ -13,14 +15,14 @@ import BottomButton from './BottomButton';
 function Home() {
   const screenWidth = Dimensions.get('screen').width;
 
-  const {accessToken, is401Status, setIs401Status} = useAccessToken();
+  const {accessToken, is401Status} = useAccessToken();
   const {isStaff} = useStaff();
-  const {passQr, getPassQr, resetPassQr} = usePassQr();
+  const {passQr, getPassQr} = usePassQr();
 
   const [isInitShow, setIsInitShow] = useState(false);
 
   const [passCategory, setPassCategory] = useState('qrcode');
-  const [countdown, setCountdown] = useState(0);
+  const [countdown, setCountdown] = useAtom(countdownAtom);
   const [isRefrashLoading, setIsRefrashLoading] = useState(false);
 
   const setCountdownViaPassQrGot = async () => {
@@ -28,13 +30,7 @@ function Home() {
     const resp = await getPassQr(accessToken);
     const {data} = resp;
     if (data.code === 0) {
-      setCountdown(data.result.minute ?? 0);
       setIsRefrashLoading(false);
-    }
-    if (data.code === 401) {
-      setCountdown(0);
-      setIs401Status(true);
-      resetPassQr();
     }
 
     return resp;

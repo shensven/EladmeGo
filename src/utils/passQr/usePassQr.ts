@@ -1,9 +1,12 @@
 import {useAtom} from 'jotai';
 import type {AxiosResponse} from 'axios';
-import {lastFloorUsedAtom, passQrAtom} from '@/utils/status/atom';
-import {axiosInstance} from '@/utils/httpClient';
+import 'react-native-get-random-values';
+import {v4 as uuidv4} from 'uuid';
+import {countdownAtom, lastFloorUsedAtom, passQrAtom} from '@/utils/status/atom';
+import {axiosInstance, useAccessToken} from '@/utils/httpClient';
 
 type PassQr = {
+  uuid: string;
   common_floor: number[];
   default_floor: number;
   elevator: number[];
@@ -16,7 +19,14 @@ type PassQr = {
 
 const usePassQr = () => {
   const [passQr, setPassQr] = useAtom(passQrAtom);
+  const [, setCountdown] = useAtom(countdownAtom);
+
   const [lastFloorUsed, setLastFloorUsed] = useAtom(lastFloorUsedAtom);
+  const {setIs401Status} = useAccessToken();
+
+  const resetPassQr = () => {
+    setPassQr(undefined);
+  };
 
   const getPassQr = async (accessToken: string, targetFloor?: number) => {
     const floor = targetFloor ?? lastFloorUsed;
@@ -39,8 +49,15 @@ const usePassQr = () => {
     const {data} = resp;
 
     if (data.code === 0) {
-      setPassQr(data.result);
+      setPassQr({...data.result, uuid: uuidv4()});
+      setCountdown(data.result.minute ?? 0);
       setLastFloorUsed(data.result.default_floor);
+    }
+
+    if (data.code === 401) {
+      setCountdown(0);
+      resetPassQr();
+      setIs401Status(true);
     }
 
     if (data.code === 705) {
@@ -48,10 +65,6 @@ const usePassQr = () => {
     }
 
     return resp;
-  };
-
-  const resetPassQr = () => {
-    setPassQr(undefined);
   };
 
   return {passQr, getPassQr, resetPassQr};
