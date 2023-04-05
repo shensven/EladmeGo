@@ -1,6 +1,5 @@
 import React, {createContext, useRef} from 'react';
 import type {PropsWithChildren, RefObject} from 'react';
-
 import type GorhomBottomSheet from '@gorhom/bottom-sheet';
 
 const BottomSheetContext = createContext<RefObject<GorhomBottomSheet> | null>(null);
