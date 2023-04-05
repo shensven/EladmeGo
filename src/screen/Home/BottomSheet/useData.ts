@@ -1,7 +1,8 @@
+import {usePassQr} from '@/utils/passQr';
+
 const useData = () => {
-  const data = Array(50)
-    .fill(0)
-    .map((_, index) => `index-${index}`);
+  const {passQr} = usePassQr();
+  const data = passQr?.elevator ?? [];
 
   return data;
 };

@@ -18,6 +18,7 @@ const accessTokenAtom = atomWithStorage<string>('accessToken', '', storage);
 const is401StatusAtom = atom(false);
 const isStaffAtom = atom({isStaff: -1, custom: -1, isBind: -1});
 const passQrAtom = atom<PassQr | undefined>(undefined);
+const lastFloorUsedAtom = atomWithStorage<number | undefined>('lastFloorUsed', undefined, storage);
 
 export {
   themeSchemeAtom,
@@ -28,4 +29,5 @@ export {
   is401StatusAtom,
   isStaffAtom,
   passQrAtom,
+  lastFloorUsedAtom,
 };

@@ -4,6 +4,9 @@ import {Text} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useAppearance} from '@/utils/appearance';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
+import {useBottomSheet} from '@/component/BottomSheet';
+import {useAccessToken} from '@/utils/httpClient';
+import {usePassQr} from '@/utils/passQr';
 import Color from 'color';
 import FloorItem from './FloorItem';
 import useData from './useData';
@@ -11,15 +14,19 @@ import useData from './useData';
 function FloorListView() {
   const insets = useSafeAreaInsets();
   const {paperTheme} = useAppearance();
+  const {close} = useBottomSheet();
+  const {accessToken} = useAccessToken();
+  const {getPassQr} = usePassQr();
 
   const data = useData();
 
-  const renderItem = ({item}: any) => {
+  const renderItem = ({item}: {item: number}) => {
     return (
       <FloorItem
         floor={item}
         onPress={() => {
-          console.log('onPress', item);
+          getPassQr(accessToken, item);
+          close();
         }}
       />
     );
@@ -28,7 +35,7 @@ function FloorListView() {
   return (
     <BottomSheetFlatList
       data={data}
-      keyExtractor={i => i}
+      keyExtractor={item => item.toString()}
       renderItem={renderItem}
       ListHeaderComponent={
         <Text
@@ -43,9 +50,7 @@ function FloorListView() {
       }
       ListFooterComponent={<View />}
       ListFooterComponentStyle={{height: insets.bottom}}
-      style={{
-        paddingHorizontal: 24,
-      }}
+      style={{paddingHorizontal: 24}}
       contentContainerStyle={{}}
     />
   );

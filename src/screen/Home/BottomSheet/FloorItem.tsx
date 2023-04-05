@@ -4,7 +4,7 @@ import {useAppearance} from '@/utils/appearance';
 import color from 'color';
 
 type Props = {
-  floor: string;
+  floor: number;
   onPress?: () => void;
 };
 
