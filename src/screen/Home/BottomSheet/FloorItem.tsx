@@ -13,25 +13,21 @@ function FloorItem(props: Props) {
   const {paperTheme} = useAppearance();
 
   return (
-    <TouchableRipple
-      style={{
-        marginVertical: 8,
-        borderRadius: 12,
-        overflow: 'hidden',
-      }}
-      onPress={onPress}>
-      <View
-        style={{
-          height: 56,
-          paddingHorizontal: 16,
-          flexDirection: 'row',
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: color(paperTheme.colors.secondary).alpha(0.05).toString(),
-        }}>
-        <Text style={{color: paperTheme.colors.onSurface, includeFontPadding: false}}>{floor}</Text>
-      </View>
-    </TouchableRipple>
+    <View style={{marginVertical: 8, borderRadius: 12, overflow: 'hidden'}}>
+      <TouchableRipple onPress={onPress}>
+        <View
+          style={{
+            height: 56,
+            paddingHorizontal: 16,
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: color(paperTheme.colors.secondary).alpha(0.05).toString(),
+          }}>
+          <Text style={{color: paperTheme.colors.onSurface, includeFontPadding: false}}>{floor}</Text>
+        </View>
+      </TouchableRipple>
+    </View>
   );
 }
 

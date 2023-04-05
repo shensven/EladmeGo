@@ -1,7 +1,7 @@
 import React from 'react';
 import {Provider as PaperProvider} from 'react-native-paper';
 import {StatusBar} from 'react-native-bars';
-import 'react-native-gesture-handler';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {useAppEffect} from './src/utils/appEffect';
 import {useAsyncStorageFlipperPlugin} from './src/utils/asyncStorage';
 import {useAppearance} from './src/utils/appearance';
@@ -15,15 +15,17 @@ function App() {
   const {paperTheme, statusBarStyle} = useAppearance();
 
   return (
-    <PaperProvider theme={paperTheme}>
-      <BottomSheetProvider>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <PaperProvider theme={paperTheme}>
         <StatusBar animated={true} barStyle={statusBarStyle} />
-        <AppStack />
-        <BottomSheet>
-          <HomeFloorListView />
-        </BottomSheet>
-      </BottomSheetProvider>
-    </PaperProvider>
+        <BottomSheetProvider>
+          <AppStack />
+          <BottomSheet>
+            <HomeFloorListView />
+          </BottomSheet>
+        </BottomSheetProvider>
+      </PaperProvider>
+    </GestureHandlerRootView>
   );
 }
 

@@ -1,23 +1,19 @@
-import React, {useMemo} from 'react';
+import React from 'react';
 import {View} from 'react-native';
 import {Text} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useAppearance} from '@/utils/appearance';
 import {BottomSheetFlatList} from '@gorhom/bottom-sheet';
-import FloorItem from './FloorItem';
 import Color from 'color';
+import FloorItem from './FloorItem';
+import useData from './useData';
 
 function FloorListView() {
   const insets = useSafeAreaInsets();
   const {paperTheme} = useAppearance();
 
-  const data = useMemo(
-    () =>
-      Array(50)
-        .fill(0)
-        .map((_, index) => `index-${index}`),
-    [],
-  );
+  const data = useData();
+
   const renderItem = ({item}: any) => {
     return (
       <FloorItem
