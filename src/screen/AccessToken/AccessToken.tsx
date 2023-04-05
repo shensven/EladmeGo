@@ -32,7 +32,6 @@ function AccessToken() {
           break;
         case 401:
           Alert.alert('验证失败', message);
-          setIs401Status(true);
           break;
         default:
           Alert.alert('验证失败');
