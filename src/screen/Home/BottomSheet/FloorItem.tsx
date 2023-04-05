@@ -18,7 +18,6 @@ function FloorItem(props: Props) {
         <View
           style={{
             height: 56,
-            paddingHorizontal: 16,
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',

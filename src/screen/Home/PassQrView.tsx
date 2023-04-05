@@ -1,7 +1,6 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import {View, Image, Dimensions, ActivityIndicator} from 'react-native';
-import {IconButton, Text, TouchableRipple} from 'react-native-paper';
-import {IcRoundChevronRight, IcRoundNoAdultContent} from '@/component/icon';
+import {Text, TouchableRipple} from 'react-native-paper';
 import Color from 'color';
 import {useAppearance} from '@/utils/appearance';
 import {usePassQr} from '@/utils/passQr';
@@ -16,23 +15,13 @@ function PassQrView(props: Props) {
   const {countdown, isRefrashLoading, onPress} = props;
   const screenWidth = Dimensions.get('screen').width;
 
-  const {navigationTheme, paperTheme} = useAppearance();
+  const {paperTheme} = useAppearance();
   const {passQr} = usePassQr();
-
-  const IconButtonXXX = useCallback(() => <IcRoundNoAdultContent color="transparent" />, []);
-  const IconButtonChevron = useCallback(
-    () => <IcRoundChevronRight color={Color(paperTheme.colors.onBackground).alpha(0.45).hexa()} />,
-    [navigationTheme.dark],
-  );
 
   return (
     <View style={{alignItems: 'center'}}>
-      <View style={{height: 56, justifyContent: 'flex-end'}}>
-        <View style={{flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
-          <IconButton disabled icon={IconButtonXXX} size={12} />
-          <Text>{passQr?.enterprise_name}</Text>
-          <IconButton icon={IconButtonChevron} size={12} onPress={() => {}} />
-        </View>
+      <View style={{height: 48, justifyContent: 'flex-end'}}>
+        <Text>{passQr?.enterprise_name}</Text>
       </View>
       <View
         style={{
@@ -42,7 +31,7 @@ function PassQrView(props: Props) {
           height: screenWidth / 1.5 + 24,
           backgroundColor: '#fff',
           borderRadius: 24,
-          //   marginTop: 4,
+          marginTop: 8,
         }}>
         <Image source={{uri: passQr?.qrCode}} style={{width: screenWidth / 1.5, height: screenWidth / 1.5}} />
       </View>

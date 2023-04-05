@@ -16,9 +16,10 @@ const BottomSheet = (props: PropsWithChildren<{}>) => {
     <GorhomBottomSheet
       ref={bottomSheetRef}
       index={-1}
-      snapPoints={['65%']}
+      snapPoints={['63%']}
       enablePanDownToClose
       backdropComponent={renderBackdrop}
+      style={{marginHorizontal: 16}}
       onChange={() => {}}>
       {children}
     </GorhomBottomSheet>

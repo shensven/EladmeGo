@@ -49,7 +49,7 @@ function FloorListView() {
         </Text>
       }
       ListFooterComponent={<View />}
-      ListFooterComponentStyle={{height: insets.bottom}}
+      ListFooterComponentStyle={{height: 8 + insets.bottom}}
       style={{paddingHorizontal: 24}}
       contentContainerStyle={{}}
     />
