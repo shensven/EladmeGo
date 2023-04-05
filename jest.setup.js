@@ -49,3 +49,9 @@ jest.mock('@react-navigation/devtools', () => {
 jest.mock('@react-native-async-storage/async-storage', () =>
   require('@react-native-async-storage/async-storage/jest/async-storage-mock'),
 );
+
+jest.mock('uuid', () => {
+  return {
+    v4: jest.fn().mockReturnValue('uuid'),
+  };
+});
