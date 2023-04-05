@@ -1,12 +1,11 @@
 import {useAtom} from 'jotai';
 import type {AxiosResponse} from 'axios';
 import 'react-native-get-random-values';
-import {v4 as uuidv4} from 'uuid';
+import {v1 as uuidv1} from 'uuid';
 import {countdownAtom, lastFloorUsedAtom, passQrAtom} from '@/utils/status/atom';
 import {axiosInstance, useAccessToken} from '@/utils/httpClient';
 
 type PassQr = {
-  uuid: string;
   common_floor: number[];
   default_floor: number;
   elevator: number[];
@@ -15,6 +14,7 @@ type PassQr = {
   job_number: string;
   minute: number;
   qrCode: string;
+  uuid?: string;
 };
 
 const usePassQr = () => {
@@ -49,7 +49,7 @@ const usePassQr = () => {
     const {data} = resp;
 
     if (data.code === 0) {
-      setPassQr({...data.result, uuid: uuidv4()});
+      setPassQr({...data.result, uuid: uuidv1()});
       setCountdown(data.result.minute ?? 0);
       setLastFloorUsed(data.result.default_floor);
     }

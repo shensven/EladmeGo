@@ -21,13 +21,13 @@ function Home() {
   const {passQr, getPassQr} = usePassQr();
 
   const [isInitShow, setIsInitShow] = useState(false);
-
   const [passCategory, setPassCategory] = useState('qrcode');
   const [countdown, setCountdown] = useAtom(countdownAtom);
   const [isRefrashLoading, setIsRefrashLoading] = useState(false);
 
   const setCountdownViaPassQrGot = async () => {
     setIsRefrashLoading(true);
+
     const resp = await getPassQr(accessToken);
     const {data} = resp;
     if (data.code === 0) {
@@ -56,11 +56,8 @@ function Home() {
         setCountdown(prev => {
           // console.log('prevCountdown', prev);
           if (prev <= 0) {
-            setCountdownViaPassQrGot().then(resp => {
-              if (resp.data.code === 401) {
-                clearInterval(timer);
-              }
-            });
+            setCountdownViaPassQrGot();
+            clearInterval(timer);
             return 0;
           } else {
             return prev - 1;
