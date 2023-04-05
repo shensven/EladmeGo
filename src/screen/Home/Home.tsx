@@ -3,6 +3,7 @@ import {ActivityIndicator, Dimensions, View} from 'react-native';
 import {SegmentedButtons, Text} from 'react-native-paper';
 import {useAtom} from 'jotai';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useAppearance} from '@/utils/appearance';
 import {useAccessToken} from '@/utils/httpClient';
 import {useStaff} from '@/utils/staff';
 import {usePassQr} from '@/utils/passQr';
@@ -14,7 +15,7 @@ import BottomButton from './BottomButton';
 
 function Home() {
   const screenWidth = Dimensions.get('screen').width;
-
+  const {paperTheme} = useAppearance();
   const {accessToken, is401Status} = useAccessToken();
   const {isStaff} = useStaff();
   const {passQr, getPassQr} = usePassQr();
@@ -99,8 +100,8 @@ function Home() {
         </View>
       )}
       {isStaff.isStaff === 1 && !is401Status && !passQr && (
-        <View style={{height: 48, justifyContent: 'flex-end'}}>
-          <ActivityIndicator animating={isRefrashLoading} />
+        <View style={{height: screenWidth / 1.5 - 48, justifyContent: 'flex-end'}}>
+          <ActivityIndicator animating={isRefrashLoading} size="large" color={paperTheme.colors.onBackground} />
         </View>
       )}
       {isStaff.isStaff === 1 && !is401Status && passQr && (
