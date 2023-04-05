@@ -7,6 +7,7 @@ import {useAppearance} from '@/utils/appearance';
 import {IcRoundMoreHoriz, IcRoundMoreVert, IcRoundShareArrivalTime} from '@/component/icon';
 
 type StackParamList = {
+  InviteVisitors: undefined;
   Settings: undefined;
 };
 type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
@@ -31,7 +32,7 @@ function HeaderRight() {
 
   return (
     <View style={{flexDirection: 'row', alignItems: 'center'}}>
-      <IconButton icon={IconButtonShare} onPress={() => {}} />
+      <IconButton icon={IconButtonShare} onPress={() => navigation.navigate('InviteVisitors')} />
       <IconButton icon={IconButtonMore} onPress={() => navigation.navigate('Settings')} />
     </View>
   );

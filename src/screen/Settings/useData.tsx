@@ -18,6 +18,7 @@ import color from 'color';
 type StackParamList = {
   Welcome: undefined;
   AccessToken: undefined;
+  HistoryOfRequests: undefined;
   Appearance: undefined;
   PrivacyPolicy: undefined;
   OpenSourceLibraries: undefined;
@@ -56,7 +57,7 @@ const useData = () => {
       title: '最近请求',
       leftIcon: <IcRoundWaterfallChart color={color(colors.onBackground).alpha(0.9).toString()} />,
       rightIcon: <IcRoundChevronRight color={color(colors.onBackground).alpha(0.7).toString()} />,
-      onPress: () => {},
+      onPress: () => navigation.navigate('HistoryOfRequests'),
     },
     {
       title: '外观',
@@ -68,8 +69,7 @@ const useData = () => {
       title: '开源库',
       leftIcon: <IcRoundCode color={color(colors.onBackground).alpha(0.9).toString()} />,
       rightIcon: <IcRoundChevronRight color={color(colors.onBackground).alpha(0.7).toString()} />,
-      // onPress: () => navigation.navigate('OpenSourceLibraries'),
-      onPress: () => {},
+      onPress: () => navigation.navigate('OpenSourceLibraries'),
     },
     {
       title: '报告问题',

@@ -5,10 +5,13 @@ import {HeaderStyleInterpolators, TransitionPresets, createStackNavigator} from 
 import {useFlipper} from '@react-navigation/devtools';
 import {navigationLightTheme, useAppearance} from '@/utils/appearance';
 import {Home, HeaderRight} from '@/screen/Home';
+import {InviteVisitors} from '@/screen/InviteVisitors';
 import {Settings} from '@/screen/Settings';
 import {Welcome} from '@/screen/Welcome';
 import {AccessToken} from '@/screen/AccessToken';
+import {HistoryOfRequests} from '@/screen/HistoryOfRequests';
 import {Appearance} from '@/screen/Appearance';
+import {OpenSourceLibraries} from './screen/OpenSourceLibraries';
 import {About} from '@/screen/About';
 
 const {Navigator, Screen} = createStackNavigator();
@@ -42,14 +45,8 @@ function AppStack() {
           ...TransitionPresets.SlideFromRightIOS,
           headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
         }}>
-        <Screen
-          name="Home"
-          component={Home}
-          options={{
-            headerTitle: 'EladmeGo',
-            headerRight: HeaderRight,
-          }}
-        />
+        <Screen name="Home" component={Home} options={{headerTitle: 'EladmeGo', headerRight: HeaderRight}} />
+        <Screen name="InviteVisitors" component={InviteVisitors} options={{headerTitle: '邀请访客'}} />
         <Screen name="Settings" component={Settings} options={{headerTitle: '设置'}} />
         <Screen
           name="Welcome"
@@ -68,7 +65,9 @@ function AppStack() {
           }}
         />
         <Screen name="AccessToken" component={AccessToken} options={{headerTitle: '访问令牌'}} />
+        <Screen name="HistoryOfRequests" component={HistoryOfRequests} options={{headerTitle: '最近请求'}} />
         <Screen name="Appearance" component={Appearance} options={{headerTitle: '外观'}} />
+        <Screen name="OpenSourceLibraries" component={OpenSourceLibraries} options={{headerTitle: '开源库'}} />
         <Screen name="About" component={About} options={{headerTitle: '关于'}} />
       </Navigator>
     </NavigationContainer>
