@@ -1,7 +1,7 @@
 import {Alert, View} from 'react-native';
 import React, {useCallback, useState} from 'react';
 import {Button, TextInput} from 'react-native-paper';
-import {IcRoundVisibility, IcRoundVisibilityOff} from '@/component/icon';
+import {IcRoundVisibility, IcRoundVisibilityOff} from '@/component/Icon';
 import {useAppearance} from '@/utils/appearance';
 import {useAccessToken, useActive} from '@/utils/httpClient';
 import {useStaff} from '@/utils/staff';

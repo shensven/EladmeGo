@@ -2,7 +2,7 @@ import React from 'react';
 import {Linking, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {IcRoundOpenInNew} from '@/component/icon';
+import {IcRoundOpenInNew} from '@/component/Icon';
 import {useAppearance} from '@/utils/appearance';
 import color from 'color';
 import Item from './Item';

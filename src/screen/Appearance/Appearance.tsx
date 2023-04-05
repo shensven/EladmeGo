@@ -2,7 +2,7 @@ import React from 'react';
 import {ScrollView, View} from 'react-native';
 import color from 'color';
 import {Text, TouchableRipple} from 'react-native-paper';
-import {IcRoundCheck} from '@/component/icon';
+import {IcRoundCheck} from '@/component/Icon';
 import {useAppearance} from '@/utils/appearance';
 
 function Appearance() {

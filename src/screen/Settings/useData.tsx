@@ -12,7 +12,7 @@ import {
   IcRoundInfo,
   IcRoundOpenInNew,
   IcRoundWaterfallChart,
-} from '@/component/icon';
+} from '@/component/Icon';
 import color from 'color';
 
 type StackParamList = {

@@ -4,7 +4,7 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import {IconButton} from 'react-native-paper';
 import {useAppearance} from '@/utils/appearance';
-import {IcRoundMoreHoriz, IcRoundMoreVert, IcRoundShareArrivalTime} from '@/component/icon';
+import {IcRoundMoreHoriz, IcRoundMoreVert, IcRoundShareArrivalTime} from '@/component/Icon';
 
 type StackParamList = {
   InviteVisitors: undefined;
