@@ -6,6 +6,7 @@ import {useAppEffect} from './src/utils/appEffect';
 import {useAsyncStorageFlipperPlugin} from './src/utils/asyncStorage';
 import {useAppearance} from './src/utils/appearance';
 import AppStack from './src/AppStack';
+import {BottomSheet, BottomSheetProvider} from './src/component/BottomSheet';
 
 function App() {
   useAppEffect();
@@ -14,8 +15,11 @@ function App() {
 
   return (
     <PaperProvider theme={paperTheme}>
-      <StatusBar animated={true} barStyle={statusBarStyle} />
-      <AppStack />
+      <BottomSheetProvider>
+        <StatusBar animated={true} barStyle={statusBarStyle} />
+        <AppStack />
+        <BottomSheet />
+      </BottomSheetProvider>
     </PaperProvider>
   );
 }

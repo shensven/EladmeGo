@@ -4,12 +4,14 @@ import {Button, Text} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useAppearance} from '@/utils/appearance';
 import {usePassQr} from '@/utils/passQr';
+import {useBottomSheet} from '@/component/BottomSheet';
 
 function BottomButton() {
   const screenWidth = Dimensions.get('screen').width;
   const insets = useSafeAreaInsets();
   const {paperTheme} = useAppearance();
   const {passQr} = usePassQr();
+  const {expand} = useBottomSheet();
 
   return (
     <View style={{position: 'absolute', bottom: 32 + insets.bottom}}>
@@ -25,7 +27,7 @@ function BottomButton() {
         }}
         style={{marginTop: 8, borderRadius: 16, justifyContent: 'center', alignItems: 'center'}}
         contentStyle={{width: screenWidth / 1.5 + 24}}
-        onPress={() => {}}>
+        onPress={expand}>
         选择楼层
       </Button>
     </View>
