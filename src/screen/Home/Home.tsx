@@ -56,7 +56,7 @@ function Home() {
     if (isStaff.isStaff === 1 && !is401Status) {
       const timer = setInterval(() => {
         setCountdown(prev => {
-          console.log('prevCountdown', prev);
+          // console.log('prevCountdown', prev);
           if (prev <= 0) {
             setCountdownViaPassQrGot().then(resp => {
               if (resp.data.code === 401) {
