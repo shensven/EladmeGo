@@ -4,7 +4,7 @@ import {NavigationContainer, useNavigationContainerRef} from '@react-navigation/
 import {HeaderStyleInterpolators, TransitionPresets, createStackNavigator} from '@react-navigation/stack';
 import {useFlipper} from '@react-navigation/devtools';
 import {navigationLightTheme, useAppearance} from '@/utils/appearance';
-import {Home, HeaderRight} from '@/screen/Home';
+import {Home, HeaderRight, HeaderTitle} from '@/screen/Home';
 import {InviteVisitors} from '@/screen/InviteVisitors';
 import {Settings} from '@/screen/Settings';
 import {Welcome} from '@/screen/Welcome';
@@ -45,7 +45,7 @@ function AppStack() {
           ...TransitionPresets.SlideFromRightIOS,
           headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
         }}>
-        <Screen name="Home" component={Home} options={{headerTitle: 'EladmeGo', headerRight: HeaderRight}} />
+        <Screen name="Home" component={Home} options={{headerTitle: HeaderTitle, headerRight: HeaderRight}} />
         <Screen name="InviteVisitors" component={InviteVisitors} options={{headerTitle: '邀请访客'}} />
         <Screen name="Settings" component={Settings} options={{headerTitle: '设置'}} />
         <Screen
