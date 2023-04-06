@@ -1,6 +1,8 @@
 import React from 'react';
-import {View, Image, Dimensions, ActivityIndicator} from 'react-native';
+import {View, Dimensions, ActivityIndicator} from 'react-native';
 import {Text, TouchableRipple} from 'react-native-paper';
+import Image from 'react-native-image-progress';
+import {Bar as ProgressBar} from 'react-native-progress';
 import Color from 'color';
 import {useAppearance} from '@/utils/appearance';
 import {usePassQr} from '@/utils/passQr';
@@ -33,7 +35,18 @@ function PassQrView(props: Props) {
           borderRadius: 24,
           marginTop: 8,
         }}>
-        <Image source={{uri: passQr?.qrCode}} style={{width: screenWidth / 1.5, height: screenWidth / 1.5}} />
+        <Image
+          source={{uri: passQr?.qrCode}}
+          indicator={ProgressBar}
+          indicatorProps={{
+            indeterminate: true,
+            borderWidth: 1,
+            borderColor: paperTheme.colors.outline,
+            color: paperTheme.colors.primaryContainer,
+          }}
+          threshold={0}
+          style={{width: screenWidth / 1.5, height: screenWidth / 1.5}}
+        />
       </View>
       <View style={{height: 24, justifyContent: 'flex-end'}}>
         {passQr && (
