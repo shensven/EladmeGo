@@ -55,3 +55,15 @@ jest.mock('uuid', () => {
     v4: jest.fn().mockReturnValue('uuid'),
   };
 });
+
+jest.mock('react-native-image-progress', () => {
+  return {
+    Image: 'Image',
+  };
+});
+
+jest.mock('react-native-progress', () => {
+  return {
+    Bar: 'Bar',
+  };
+});
