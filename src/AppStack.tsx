@@ -31,7 +31,7 @@ function AppStack() {
         }, 1000)
       }>
       <Navigator
-        initialRouteName="Home"
+        initialRouteName="EladmeGo"
         screenOptions={{
           headerTitleStyle: {
             fontWeight: 'bold',
@@ -46,7 +46,7 @@ function AppStack() {
           headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
         }}>
         <Screen
-          name="Home"
+          name="EladmeGo"
           component={Home}
           options={{
             headerTitle: HeaderTitle,
