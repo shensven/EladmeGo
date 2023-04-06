@@ -1,19 +1,17 @@
 import React from 'react';
 import {View} from 'react-native';
-import {SvgXml} from 'react-native-svg';
 import {IconButton} from 'react-native-paper';
 import {useAppearance} from '@/utils/appearance';
-import IcRoundDownload from '@/component/Icon/IcRoundDownload.svg';
-import IcRoundFilterList from '@/component/Icon/IcRoundFilterList.svg';
+import {IcRoundDownload, IcRoundFilterList} from '@/component/Icon';
 
 function IcRoundDownloadSvg() {
   const {navigationTheme} = useAppearance();
-  return <SvgXml width={24} height={24} xml={IcRoundDownload.toString()} color={navigationTheme.colors.text} />;
+  return <IcRoundDownload width={24} height={24} color={navigationTheme.colors.text} />;
 }
 
 function IcRoundFilterListSvg() {
   const {navigationTheme} = useAppearance();
-  return <SvgXml width={24} height={24} xml={IcRoundFilterList.toString()} color={navigationTheme.colors.text} />;
+  return <IcRoundFilterList width={24} height={24} color={navigationTheme.colors.text} />;
 }
 
 function HeaderRight() {

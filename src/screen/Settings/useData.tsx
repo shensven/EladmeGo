@@ -49,38 +49,50 @@ const useData = () => {
     ...initData,
     {
       title: '访问令牌',
-      leftIcon: <IcRoundAdminPanelSettings color={color(colors.onBackground).alpha(0.9).toString()} />,
-      rightIcon: <IcRoundChevronRight color={color(colors.onBackground).alpha(0.7).toString()} />,
+      leftIcon: (
+        <IcRoundAdminPanelSettings width={24} height={24} color={color(colors.onBackground).alpha(0.9).toString()} />
+      ),
+      rightIcon: (
+        <IcRoundChevronRight width={24} height={24} color={color(colors.onBackground).alpha(0.7).toString()} />
+      ),
       onPress: () => navigation.navigate('AccessToken'),
     },
     {
       title: '最近请求',
-      leftIcon: <IcRoundWaterfallChart color={color(colors.onBackground).alpha(0.9).toString()} />,
-      rightIcon: <IcRoundChevronRight color={color(colors.onBackground).alpha(0.7).toString()} />,
+      leftIcon: (
+        <IcRoundWaterfallChart width={24} height={24} color={color(colors.onBackground).alpha(0.9).toString()} />
+      ),
+      rightIcon: (
+        <IcRoundChevronRight width={24} height={24} color={color(colors.onBackground).alpha(0.7).toString()} />
+      ),
       onPress: () => navigation.navigate('HistoryOfRequests'),
     },
     {
       title: '外观',
-      leftIcon: <IcRoundColorLens color={color(colors.onBackground).alpha(0.9).toString()} />,
-      rightIcon: <IcRoundChevronRight color={color(colors.onBackground).alpha(0.7).toString()} />,
+      leftIcon: <IcRoundColorLens width={24} height={24} color={color(colors.onBackground).alpha(0.9).toString()} />,
+      rightIcon: (
+        <IcRoundChevronRight width={24} height={24} color={color(colors.onBackground).alpha(0.7).toString()} />
+      ),
       onPress: () => navigation.navigate('Appearance'),
     },
     {
       title: '开源库',
-      leftIcon: <IcRoundCode color={color(colors.onBackground).alpha(0.9).toString()} />,
-      rightIcon: <IcRoundChevronRight color={color(colors.onBackground).alpha(0.7).toString()} />,
+      leftIcon: <IcRoundCode width={24} height={24} color={color(colors.onBackground).alpha(0.9).toString()} />,
+      rightIcon: (
+        <IcRoundChevronRight width={24} height={24} color={color(colors.onBackground).alpha(0.7).toString()} />
+      ),
       onPress: () => navigation.navigate('OpenSourceLibraries'),
     },
     {
       title: '报告问题',
       description: 'https://github.com/shensven/EladmeGo/issues',
-      leftIcon: <IcRoundBugReport color={color(colors.onBackground).alpha(0.9).toString()} />,
-      rightIcon: <IcRoundOpenInNew color={color(colors.onBackground).alpha(0.7).toString()} size={18} />,
+      leftIcon: <IcRoundBugReport width={24} height={24} color={color(colors.onBackground).alpha(0.9).toString()} />,
+      rightIcon: <IcRoundOpenInNew width={18} height={18} color={color(colors.onBackground).alpha(0.7).toString()} />,
       onPress: () => Linking.openURL('https://github.com/shensven/EladmeGo/issues'),
     },
     {
       title: '关于',
-      leftIcon: <IcRoundInfo color={color(colors.onBackground).alpha(0.9).toString()} />,
+      leftIcon: <IcRoundInfo width={24} height={24} color={color(colors.onBackground).alpha(0.9).toString()} />,
       rightIcon: <IcRoundChevronRight color={color(colors.onBackground).alpha(0.7).toString()} />,
       onPress: () => navigation.navigate('About'),
     },

@@ -33,7 +33,9 @@ function OpenSourceLibraries() {
       <Item
         name={item.name}
         license={item.license}
-        rightIcon={<IcRoundOpenInNew size={14} color={color(paperTheme.colors.onBackground).alpha(0.7).hexa()} />}
+        rightIcon={
+          <IcRoundOpenInNew width={14} height={14} color={color(paperTheme.colors.onBackground).alpha(0.7).hexa()} />
+        }
         onPress={() => Linking.openURL(item.repository)}
       />
     );

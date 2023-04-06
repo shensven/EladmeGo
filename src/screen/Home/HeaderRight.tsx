@@ -8,24 +8,24 @@ import {IcRoundMoreHoriz, IcRoundMoreVert, IcRoundShareArrivalTime} from '@/comp
 
 function IconButtonShare() {
   const {navigationTheme} = useAppearance();
-  return <IcRoundShareArrivalTime color={navigationTheme.colors.text} />;
+  return <IcRoundShareArrivalTime width={24} height={24} color={navigationTheme.colors.text} />;
 }
 
 function IconButtonMore() {
   const {navigationTheme} = useAppearance();
   switch (Platform.OS) {
     case 'ios':
-      return <IcRoundMoreHoriz color={navigationTheme.colors.text} />;
+      return <IcRoundMoreHoriz width={24} height={24} color={navigationTheme.colors.text} />;
     case 'android':
-      return <IcRoundMoreVert color={navigationTheme.colors.text} />;
+      return <IcRoundMoreVert width={24} height={24} color={navigationTheme.colors.text} />;
     case 'macos':
-      return <IcRoundMoreHoriz color={navigationTheme.colors.text} />;
+      return <IcRoundMoreHoriz width={24} height={24} color={navigationTheme.colors.text} />;
     case 'windows':
-      return <IcRoundMoreVert color={navigationTheme.colors.text} />;
+      return <IcRoundMoreVert width={24} height={24} color={navigationTheme.colors.text} />;
     case 'web':
-      return <IcRoundMoreVert color={navigationTheme.colors.text} />;
+      return <IcRoundMoreVert width={24} height={24} color={navigationTheme.colors.text} />;
     default:
-      return <IcRoundMoreVert color={navigationTheme.colors.text} />;
+      return <IcRoundMoreVert width={24} height={24} color={navigationTheme.colors.text} />;
   }
 }
 

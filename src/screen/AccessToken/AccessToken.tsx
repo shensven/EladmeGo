@@ -56,9 +56,9 @@ function AccessToken() {
   const TextInputIcon = useCallback(
     () =>
       form.secureTextEntry ? (
-        <IcRoundVisibilityOff color={paperTheme.colors.onBackground} />
+        <IcRoundVisibilityOff width={24} height={24} color={paperTheme.colors.onBackground} />
       ) : (
-        <IcRoundVisibility color={paperTheme.colors.onBackground} />
+        <IcRoundVisibility width={24} height={24} color={paperTheme.colors.onBackground} />
       ),
     [form.secureTextEntry, paperTheme.dark],
   );

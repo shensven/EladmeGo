@@ -41,7 +41,7 @@ function Appearance() {
                 backgroundColor: color(paperTheme.colors.secondary).alpha(0.05).toString(),
               }}>
               <Text style={{color: paperTheme.colors.onSurface, includeFontPadding: false}}>{item.label}</Text>
-              {themeScheme === item.value && <IcRoundCheck size={18} color={paperTheme.colors.primary} />}
+              {themeScheme === item.value && <IcRoundCheck width={20} height={20} color={paperTheme.colors.primary} />}
             </View>
           </TouchableRipple>
         ))}
