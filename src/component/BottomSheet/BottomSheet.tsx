@@ -1,20 +1,17 @@
-import React, {PropsWithChildren, useCallback} from 'react';
+import React, {PropsWithChildren} from 'react';
 import GorhomBottomSheet, {BottomSheetBackdrop} from '@gorhom/bottom-sheet';
 import type {BottomSheetBackdropProps} from '@gorhom/bottom-sheet';
 import {useAppearance} from '@/utils/appearance';
 import useBottomSheet from './useBottomSheet';
 
+const renderBackdrop = (bottomSheetBackdropProps: BottomSheetBackdropProps) => (
+  <BottomSheetBackdrop {...bottomSheetBackdropProps} disappearsOnIndex={-1} />
+);
+
 const BottomSheet = (props: PropsWithChildren<{}>) => {
   const {children} = props;
   const {paperTheme} = useAppearance();
   const {bottomSheetRef} = useBottomSheet();
-
-  const renderBackdrop = useCallback(
-    (bottomSheetBackdropProps: BottomSheetBackdropProps) => (
-      <BottomSheetBackdrop {...bottomSheetBackdropProps} disappearsOnIndex={-1} />
-    ),
-    [],
-  );
 
   return (
     <GorhomBottomSheet

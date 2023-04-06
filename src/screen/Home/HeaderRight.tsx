@@ -1,10 +1,33 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import {Platform, View} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import {IconButton} from 'react-native-paper';
 import {useAppearance} from '@/utils/appearance';
 import {IcRoundMoreHoriz, IcRoundMoreVert, IcRoundShareArrivalTime} from '@/component/Icon';
+
+function IconButtonShare() {
+  const {navigationTheme} = useAppearance();
+  return <IcRoundShareArrivalTime color={navigationTheme.colors.text} />;
+}
+
+function IconButtonMore() {
+  const {navigationTheme} = useAppearance();
+  switch (Platform.OS) {
+    case 'ios':
+      return <IcRoundMoreHoriz color={navigationTheme.colors.text} />;
+    case 'android':
+      return <IcRoundMoreVert color={navigationTheme.colors.text} />;
+    case 'macos':
+      return <IcRoundMoreHoriz color={navigationTheme.colors.text} />;
+    case 'windows':
+      return <IcRoundMoreVert color={navigationTheme.colors.text} />;
+    case 'web':
+      return <IcRoundMoreVert color={navigationTheme.colors.text} />;
+    default:
+      return <IcRoundMoreVert color={navigationTheme.colors.text} />;
+  }
+}
 
 type StackParamList = {
   InviteVisitors: undefined;
@@ -14,21 +37,6 @@ type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
 
 function HeaderRight() {
   const navigation = useNavigation<ScreenNavigationProp>();
-  const {navigationTheme} = useAppearance();
-
-  const IconButtonShare = useCallback(
-    () => <IcRoundShareArrivalTime color={navigationTheme.colors.text} />,
-    [navigationTheme.dark],
-  );
-  const IconButtonMore = useCallback(
-    () => (
-      <>
-        {Platform.OS === 'ios' && <IcRoundMoreHoriz color={navigationTheme.colors.text} />}
-        {Platform.OS === 'android' && <IcRoundMoreVert color={navigationTheme.colors.text} />}
-      </>
-    ),
-    [navigationTheme.dark],
-  );
 
   return (
     <View style={{flexDirection: 'row', alignItems: 'center'}}>
