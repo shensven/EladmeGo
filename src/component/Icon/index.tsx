@@ -16,3 +16,4 @@ export {default as IcRoundWaterfallChart} from './IcRoundWaterfallChart.svg';
 export {default as IcRoundShareArrivalTime} from './IcRoundShareArrivalTime.svg';
 export {default as IcRoundDownload} from './IcRoundDownload.svg';
 export {default as IcRoundFilterList} from './IcRoundFilterList.svg';
+export {default as IcRoundNoAdultContent} from './IcRoundNoAdultContent.svg';

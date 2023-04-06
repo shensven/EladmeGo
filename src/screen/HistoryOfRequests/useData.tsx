@@ -41,7 +41,7 @@ const useData = () => {
     {
       uuid: '5',
       api: '/member/v1/member/getPassQr',
-      header: {authorization: '12323324332432dfsgdhfgdgkdhsgf239dhfdefuewhfe'},
+      header: {Authorization: '12323324332432dfsgdhfgdgkdhsgf239dhfdefuewhfe'},
       query: {},
       onPress: () => console.log('5'),
     },

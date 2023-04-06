@@ -1,4 +1,4 @@
-import {Alert, View} from 'react-native';
+import {Alert, Keyboard, View} from 'react-native';
 import React, {useCallback, useState} from 'react';
 import {Button, TextInput} from 'react-native-paper';
 import {IcRoundVisibility, IcRoundVisibilityOff} from '@/component/Icon';
@@ -20,6 +20,7 @@ function AccessToken() {
   });
 
   const submit = () => {
+    Keyboard.dismiss();
     verifyActive(form.accessToken).then(respActive => {
       const {code, message} = respActive.data;
       switch (code) {

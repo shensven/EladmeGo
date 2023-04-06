@@ -19,12 +19,13 @@ function API(props: Props) {
           paddingHorizontal: 4,
           paddingVertical: 1,
           borderWidth: 1,
-          borderColor: Color(paperTheme.colors.outline).alpha(0.12).hexa(),
+          borderColor: Color('green').alpha(0.35).hexa(),
           borderRadius: 6,
           color: 'green',
           backgroundColor: Color('green').alpha(0.12).hexa(),
           overflow: 'hidden',
-          alignSelf: 'flex-start',
+          textAlignVertical: 'center',
+          textAlign: 'center',
         }}>
         GET
       </Text>

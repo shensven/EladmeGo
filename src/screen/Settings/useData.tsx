@@ -93,7 +93,9 @@ const useData = () => {
     {
       title: '关于',
       leftIcon: <IcRoundInfo width={24} height={24} color={color(colors.onBackground).alpha(0.9).toString()} />,
-      rightIcon: <IcRoundChevronRight color={color(colors.onBackground).alpha(0.7).toString()} />,
+      rightIcon: (
+        <IcRoundChevronRight width={24} height={24} color={color(colors.onBackground).alpha(0.7).toString()} />
+      ),
       onPress: () => navigation.navigate('About'),
     },
   ];

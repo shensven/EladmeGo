@@ -8,6 +8,7 @@ import {useAppearance} from './src/utils/appearance';
 import AppStack from './src/AppStack';
 import {BottomSheet, BottomSheetProvider} from './src/component/BottomSheet';
 import {FloorListView as HomeFloorListView} from '@/screen/Home';
+import {DebugView} from '@/component/DebugView';
 
 function App() {
   useAppEffect();
@@ -23,6 +24,7 @@ function App() {
           <BottomSheet>
             <HomeFloorListView />
           </BottomSheet>
+          {__DEV__ && <DebugView />}
         </BottomSheetProvider>
       </PaperProvider>
     </GestureHandlerRootView>

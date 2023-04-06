@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Dimensions, ActivityIndicator} from 'react-native';
+import {View, Dimensions, ActivityIndicator, Platform} from 'react-native';
 import {Text, TouchableRipple} from 'react-native-paper';
 import Image from 'react-native-image-progress';
 import {Bar as ProgressBar} from 'react-native-progress';
@@ -50,7 +50,12 @@ function PassQrView(props: Props) {
       </View>
       <View style={{height: 24, justifyContent: 'flex-end'}}>
         {passQr && (
-          <Text variant="bodySmall" style={{color: Color(paperTheme.colors.onBackground).alpha(0.45).hexa()}}>
+          <Text
+            variant="bodySmall"
+            style={{
+              fontFamily: Platform.OS === 'ios' ? 'Menlo' : 'monospace',
+              color: Color(paperTheme.colors.onBackground).alpha(0.45).hexa(),
+            }}>
             {countdown} 秒后自动刷新
           </Text>
         )}
