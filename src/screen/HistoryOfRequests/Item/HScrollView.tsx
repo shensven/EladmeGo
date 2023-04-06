@@ -3,10 +3,11 @@ import {View, ScrollView, Dimensions} from 'react-native';
 import {Text} from 'react-native-paper';
 import {useAppearance} from '@/utils/appearance';
 import Color from 'color';
+import {v1 as uuidv1} from 'uuid';
 
 type Props = {
   title: string;
-  keyValueSets: Record<string, string>[];
+  keyValueSets: Record<string, string>;
 };
 
 function HScrollView(props: Props) {
@@ -32,10 +33,9 @@ function HScrollView(props: Props) {
           <Text numberOfLines={1} variant="bodySmall" style={{fontSize: 10, marginLeft: 8, width: 40}}>
             {title}
           </Text>
-
-          {keyValueSets.map((param, index) => (
+          {Object.keys(keyValueSets).map(key => (
             <Text
-              key={param + index.toString()}
+              key={uuidv1()}
               variant="bodySmall"
               style={{
                 fontSize: 10,
@@ -47,11 +47,7 @@ function HScrollView(props: Props) {
                 borderRadius: BORDER_RADIUS - PADDING,
                 overflow: 'hidden',
               }}>
-              {(() => {
-                const key = Object.keys(param)[0];
-                const value = param[key];
-                return `${key}=${value}`;
-              })()}
+              {key}={keyValueSets[key]}
             </Text>
           ))}
         </View>
