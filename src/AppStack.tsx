@@ -4,12 +4,12 @@ import {NavigationContainer, useNavigationContainerRef} from '@react-navigation/
 import {HeaderStyleInterpolators, TransitionPresets, createStackNavigator} from '@react-navigation/stack';
 import {useFlipper} from '@react-navigation/devtools';
 import {navigationLightTheme, useAppearance} from '@/utils/appearance';
-import {Home, HeaderRight, HeaderTitle} from '@/screen/Home';
+import {Home, HeaderRight as HomeHeaderRight, HeaderTitle} from '@/screen/Home';
 import {InviteVisitors} from '@/screen/InviteVisitors';
 import {Settings} from '@/screen/Settings';
 import {Welcome} from '@/screen/Welcome';
 import {AccessToken} from '@/screen/AccessToken';
-import {HistoryOfRequests} from '@/screen/HistoryOfRequests';
+import {HeaderRight as HistoryOfRequestsHeaderRight, HistoryOfRequests} from '@/screen/HistoryOfRequests';
 import {Appearance} from '@/screen/Appearance';
 import {OpenSourceLibraries} from './screen/OpenSourceLibraries';
 import {About} from '@/screen/About';
@@ -45,8 +45,15 @@ function AppStack() {
           ...TransitionPresets.SlideFromRightIOS,
           headerStyleInterpolator: HeaderStyleInterpolators.forUIKit,
         }}>
-        <Screen name="Home" component={Home} options={{headerTitle: HeaderTitle, headerRight: HeaderRight}} />
-        <Screen name="InviteVisitors" component={InviteVisitors} options={{headerTitle: '邀请访客'}} />
+        <Screen
+          name="Home"
+          component={Home}
+          options={{
+            headerTitle: HeaderTitle,
+            headerRight: HomeHeaderRight,
+          }}
+        />
+        <Screen name="InviteVisitors" component={InviteVisitors} options={{headerTitle: '邀请访客(WIP)'}} />
         <Screen name="Settings" component={Settings} options={{headerTitle: '设置'}} />
         <Screen
           name="Welcome"
@@ -65,7 +72,11 @@ function AppStack() {
           }}
         />
         <Screen name="AccessToken" component={AccessToken} options={{headerTitle: '访问令牌'}} />
-        <Screen name="HistoryOfRequests" component={HistoryOfRequests} options={{headerTitle: '最近请求'}} />
+        <Screen
+          name="HistoryOfRequests"
+          component={HistoryOfRequests}
+          options={{headerTitle: '最近请求(WIP)', headerRight: HistoryOfRequestsHeaderRight}}
+        />
         <Screen name="Appearance" component={Appearance} options={{headerTitle: '外观'}} />
         <Screen name="OpenSourceLibraries" component={OpenSourceLibraries} options={{headerTitle: '开源库'}} />
         <Screen name="About" component={About} options={{headerTitle: '关于'}} />
