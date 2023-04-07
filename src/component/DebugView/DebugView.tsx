@@ -16,11 +16,12 @@ function DebugView() {
 
   return (
     <IconButton
-      icon={IcRoundNoAdultContentSvg}
       mode="contained"
       size={48}
+      icon={IcRoundNoAdultContentSvg}
+      rippleColor={Color(paperTheme.colors.primary).alpha(0.6).hexa()}
       containerColor={Color(paperTheme.colors.primary).alpha(0.6).hexa()}
-      style={{position: 'absolute', margin: 16, right: 0, bottom: 0}}
+      style={{position: 'absolute', margin: 20, right: 0, bottom: 0}}
       onPress={() => {
         expand();
       }}
