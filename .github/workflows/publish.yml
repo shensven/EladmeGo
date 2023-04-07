@@ -75,6 +75,9 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Genarate license compliance
+        run: yarn lcGen
+
       - name: Setting up Gradle variables
         run: |
           cd android
@@ -102,3 +105,119 @@ jobs:
           allowUpdates: true
           draft: true
           artifacts: 'android/app/build/outputs/apk/release/*.*'
+
+  publish_ios:
+    name: Publish iOS
+    needs: get-semantic-version
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Restore CocoaPods
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/Library/Caches/CocoaPods
+            ios/Pods
+          key: ${{ runner.os }}-pods-${{ hashFiles('ios/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pods-
+
+      - name: Restore DerivedData
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/Library/Developer/Xcode/DerivedData
+          key: ${{ runner.os }}-derivedData-${{ hashFiles('ios/Podfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-derivedData-
+
+      - name: Restore node_modules
+        uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: |
+            node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Restore profile
+        env:
+          P12_CERTIFICATE_BASE64: ${{ secrets.P12_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.P12_PASSWORD }}
+          PROVISIONING_PROFILE_BASE64: ${{ secrets.PROVISIONING_PROFILE_BASE64 }}
+        run: |
+          P12_CERTIFICATE_PATH=${{ runner.temp }}/certificate.p12
+          PROVISIONING_PROFILE_PATH=${{ runner.temp }}/pp.mobileprovision
+          KEYCHAIN_PATH=${{ runner.temp }}/app_signing.keychain-db
+
+          echo -n "$P12_CERTIFICATE_BASE64" | base64 --decode --output $P12_CERTIFICATE_PATH
+          echo -n "$PROVISIONING_PROFILE_BASE64" | base64 --decode --output $PROVISIONING_PROFILE_PATH
+
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          cp $PROVISIONING_PROFILE_PATH ~/Library/MobileDevice/Provisioning\ Profiles/pp.mobileprovision
+
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 3600 $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+
+          security import $P12_CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security list-keychain -d user -s $KEYCHAIN_PATH
+
+      - name: Install dependencies
+        run: |
+          yarn install --frozen-lockfile
+          cd ios && pod install --repo-update
+
+      - name: Genarate license compliance
+        run: yarn lcGen
+
+      - name: Release for App Store & Upload to TestFlight
+        env:
+          NO_FLIPPER: '1'
+        run: |
+          cd ios
+          xcrun agvtool new-marketing-version ${{ needs.get-semantic-version.outputs.SEMANTIC_VERSION }}
+          xcrun agvtool new-version -all ${{ github.run_number }}
+
+          xcodebuild archive \
+            -workspace EladmeGo.xcworkspace \
+            -scheme EladmeGo \
+            -configuration Release \
+            -archivePath ${{ runner.temp }}/EladmeGo.xcarchive \
+            -allowProvisioningUpdates \
+            -quiet \
+            PROVISIONING_PROFILE_SPECIFIER="EladmeGo Distribution" \
+            CODE_SIGN_STYLE="Manual" \
+            CODE_SIGN_IDENTITY="iPhone Distribution"
+
+          xcodebuild  -exportArchive \
+            -archivePath ${{ runner.temp }}/EladmeGo.xcarchive \
+            -exportPath ${{ runner.temp }} \
+            -exportOptionsPlist EladmeGo/ExportOptions.plist
+            -allowProvisioningUpdates \
+            -quiet \
+            | xcpretty
+
+          xcrun altool --upload-app \
+            --type ios \
+            --file "${{ runner.temp }}/EladmeGo.ipa" \
+            --username "${{ secrets.APPLE_ID }}" \
+            --password "${{ secrets.APPLE_ID_PASS }}" \
+
+      - uses: ncipollo/release-action@v1
+        with:
+          name: App Store Backup
+          tag: app-store-backup
+          allowUpdates: true
+          draft: true
+          artifacts: '${{ runner.temp }}/*.ipa'
