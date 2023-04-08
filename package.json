@@ -17,6 +17,7 @@
     "@react-navigation/elements": "^1.3.17",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/stack": "^6.3.16",
+    "@shopify/flash-list": "^1.4.2",
     "@types/uuid": "^9.0.1",
     "ahooks": "^3.7.6",
     "axios": "^1.3.5",
@@ -74,7 +75,8 @@
     ],
     "setupFiles": [
       "<rootDir>/jest.setup.js",
-      "<rootDir>/node_modules/react-native-gesture-handler/jestSetup.js"
+      "<rootDir>/node_modules/react-native-gesture-handler/jestSetup.js",
+      "<rootDir>/node_modules/@shopify/flash-list/jestSetup.js"
     ],
     "moduleNameMapper": {
       "\\.svg": "<rootDir>/__mocks__/svgMock.js"
