@@ -25,11 +25,9 @@ function AppStack() {
     <NavigationContainer
       ref={navigationRef}
       theme={navigationTheme}
-      onReady={() =>
-        setTimeout(() => {
-          RNBootSplash.hide({fade: true, duration: 320});
-        }, 1000)
-      }>
+      onReady={() => {
+        RNBootSplash.hide({fade: true, duration: 320});
+      }}>
       <Navigator
         initialRouteName="EladmeGo"
         screenOptions={{
