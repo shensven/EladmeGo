@@ -1,8 +1,8 @@
 import React from 'react';
 import {View} from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {List} from 'react-native-paper';
 import {FlatList} from 'react-native-gesture-handler';
+import {List} from 'react-native-paper';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Item from './Item';
 import type {ItemProps} from './Item';
 import useData from './useData';

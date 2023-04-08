@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, ScrollView, Dimensions} from 'react-native';
+import {View, Dimensions} from 'react-native';
+import {ScrollView} from 'react-native-gesture-handler';
 import {Text} from 'react-native-paper';
 import {useAppearance} from '@/utils/appearance';
 import Color from 'color';
