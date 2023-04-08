@@ -48,7 +48,7 @@ function PassQrView(props: Props) {
           style={{width: screenWidth / 1.5, height: screenWidth / 1.5}}
         />
       </View>
-      <View style={{height: screenHeight < 576 ? 12 : 24, justifyContent: 'flex-end'}}>
+      <View style={{height: 24, justifyContent: 'flex-end'}}>
         {passQr && (
           <Text
             variant="bodySmall"
@@ -63,7 +63,7 @@ function PassQrView(props: Props) {
       <TouchableRipple
         borderless
         disabled={isRefrashLoading}
-        style={{marginTop: 16, borderRadius: 8}}
+        style={{marginTop: screenHeight < 576 ? 8 : 16, borderRadius: 8}}
         onPress={onPress}>
         <View
           style={{
