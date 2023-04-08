@@ -26,7 +26,10 @@ const passQrAtom = atom<PassQr | undefined>(undefined);
 const countdownAtom = atom<number>(0);
 const lastFloorUsedAtom = atomWithStorage<number | undefined>('lastFloorUsed', undefined, storage);
 
-const isAutoRefreshTokenAtom = atom(true);
+const debugAtom = atom({
+  isAutoRefreshQrCode: true,
+  enableEnterpriseNameMocking: false,
+});
 
 export {
   themeSchemeAtom,
@@ -41,5 +44,5 @@ export {
   passQrAtom,
   countdownAtom,
   lastFloorUsedAtom,
-  isAutoRefreshTokenAtom,
+  debugAtom,
 };

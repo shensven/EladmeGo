@@ -26,9 +26,7 @@ function FloorListView() {
         floor={item}
         onPress={() => {
           getPassQr(accessToken, item);
-          setTimeout(() => {
-            close();
-          }, 300);
+          setTimeout(() => close(), 300);
         }}
       />
     );
@@ -41,13 +39,7 @@ function FloorListView() {
       renderItem={renderItem}
       showsVerticalScrollIndicator={false}
       ListHeaderComponent={
-        <Text
-          variant="labelSmall"
-          style={{
-            color: Color(paperTheme.colors.onBackground).alpha(0.5).hexa(),
-            marginBottom: 8,
-            marginLeft: 8,
-          }}>
+        <Text variant="labelSmall" style={{color: Color(paperTheme.colors.onBackground).alpha(0.5).hexa(), margin: 8}}>
           选择楼层
         </Text>
       }

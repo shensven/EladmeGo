@@ -6,6 +6,7 @@ import {Bar as ProgressBar} from 'react-native-progress';
 import Color from 'color';
 import {useAppearance} from '@/utils/appearance';
 import {usePassQr} from '@/utils/passQr';
+import {useDebug} from '@/utils/debug';
 
 type Props = {
   countdown: number;
@@ -20,10 +21,12 @@ function PassQrView(props: Props) {
   const {paperTheme} = useAppearance();
   const {passQr} = usePassQr();
 
+  const {enableEnterpriseNameMocking} = useDebug();
+
   return (
     <View style={{alignItems: 'center'}}>
       <View style={{height: screenHeight < 576 ? 32 : 48, justifyContent: 'flex-end'}}>
-        <Text>{passQr?.enterprise_name}</Text>
+        <Text>{enableEnterpriseNameMocking ? '昆明我爱你你也爱我有限公司' : passQr?.enterprise_name}</Text>
       </View>
       <View
         style={{

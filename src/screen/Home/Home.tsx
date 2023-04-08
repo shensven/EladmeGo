@@ -3,16 +3,19 @@ import {ActivityIndicator, Dimensions, View} from 'react-native';
 import {SegmentedButtons, Text} from 'react-native-paper';
 import {useAtom} from 'jotai';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useDebug} from '@/utils/debug';
 import {useAppearance} from '@/utils/appearance';
 import {useAccessToken} from '@/utils/httpClient';
 import {useStaff} from '@/utils/staff';
 import {usePassQr} from '@/utils/passQr';
-import {countdownAtom, isAutoRefreshTokenAtom} from '@/utils/status/atom';
+import {countdownAtom} from '@/utils/status/atom';
 import InitView from './InitView';
 import PassQrView from './PassQrView';
 import BottomButton from './BottomButton';
 
 function Home() {
+  const {isAutoRefreshQrCode} = useDebug();
+
   const screenWidth = Dimensions.get('screen').width;
   const screenHeight = Dimensions.get('screen').height;
   const {paperTheme} = useAppearance();
@@ -23,7 +26,6 @@ function Home() {
   const [isInitShow, setIsInitShow] = useState(false);
   const [passCategory, setPassCategory] = useState('qrcode');
   const [countdown, setCountdown] = useAtom(countdownAtom);
-  const [isAutoRefreshToken] = useAtom(isAutoRefreshTokenAtom);
   const [isRefrashLoading, setIsRefrashLoading] = useState(false);
 
   const setCountdownViaPassQrGot = async () => {
@@ -52,7 +54,7 @@ function Home() {
   }, [accessToken]);
 
   useEffect(() => {
-    if (isStaff.isStaff === 1 && !is401Status && isAutoRefreshToken) {
+    if (isStaff.isStaff === 1 && !is401Status && isAutoRefreshQrCode) {
       const timer = setInterval(() => {
         setCountdown(prev => {
           // console.log('prevCountdown', prev);
@@ -67,7 +69,7 @@ function Home() {
       }, 1000);
       return () => clearInterval(timer);
     }
-  }, [isStaff, passQr, is401Status, isAutoRefreshToken]);
+  }, [isStaff, passQr, is401Status, isAutoRefreshQrCode]);
 
   return (
     <View style={{flex: 1, alignItems: 'center'}}>
