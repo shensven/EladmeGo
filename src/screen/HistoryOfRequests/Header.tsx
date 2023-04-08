@@ -32,7 +32,7 @@ function Header() {
         onChangeText={setSearchQuery}
         style={{
           flex: 1,
-          marginHorizontal: 8,
+          marginHorizontal: 16,
           marginBottom: 16,
           //   height: 40,
         }}

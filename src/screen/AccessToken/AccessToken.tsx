@@ -73,6 +73,7 @@ function AccessToken() {
         label="Access Token"
         value={form.accessToken}
         secureTextEntry={form.secureTextEntry}
+        style={{textAlign: 'auto'}}
         right={
           <TextInput.Icon
             icon={TextInputIcon}
