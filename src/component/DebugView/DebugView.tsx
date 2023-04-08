@@ -1,9 +1,11 @@
 import React from 'react';
 import {IconButton} from 'react-native-paper';
-import {useBottomSheet} from '@/component/BottomSheet';
+// import {useBottomSheet} from '@/component/BottomSheet';
 import {useAppearance} from '@/utils/appearance';
 import {IcRoundNoAdultContent} from '@/component/Icon';
 import Color from 'color';
+import {useAtom} from 'jotai';
+import {httpLogAtom} from '@/utils/status/atom';
 
 function IcRoundNoAdultContentSvg() {
   const {paperTheme} = useAppearance();
@@ -12,7 +14,8 @@ function IcRoundNoAdultContentSvg() {
 
 function DebugView() {
   const {paperTheme} = useAppearance();
-  const {expand} = useBottomSheet();
+  // const {expand} = useBottomSheet();
+  const [httpLog] = useAtom(httpLogAtom);
 
   return (
     <IconButton
@@ -23,7 +26,8 @@ function DebugView() {
       containerColor={Color(paperTheme.colors.primary).alpha(0.6).hexa()}
       style={{position: 'absolute', margin: 20, right: 0, bottom: 0}}
       onPress={() => {
-        expand();
+        // expand();
+        console.log(httpLog.length);
       }}
     />
   );

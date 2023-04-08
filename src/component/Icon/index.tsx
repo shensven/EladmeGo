@@ -17,3 +17,5 @@ export {default as IcRoundShareArrivalTime} from './IcRoundShareArrivalTime.svg'
 export {default as IcRoundDownload} from './IcRoundDownload.svg';
 export {default as IcRoundFilterList} from './IcRoundFilterList.svg';
 export {default as IcRoundNoAdultContent} from './IcRoundNoAdultContent.svg';
+export {default as IcRoundBackspace} from './IcRoundBackspace.svg';
+export {default as IcRoundMiscellaneousServices} from './IcRoundMiscellaneousServices.svg';

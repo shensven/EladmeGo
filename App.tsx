@@ -9,6 +9,7 @@ import AppStack from './src/AppStack';
 import {BottomSheet, BottomSheetProvider} from './src/component/BottomSheet';
 import {FloorListView as HomeFloorListView} from '@/screen/Home';
 import {DebugView} from '@/component/DebugView';
+import 'react-native-get-random-values';
 
 function App() {
   useAppEffect();

@@ -86,6 +86,7 @@ interface NavigationTheme extends _NavigationTheme {
   colors: _NavigationTheme['colors'] & {
     onBackground: string;
     surfaceVariant: string;
+    primaryContainer: string;
   };
 }
 
@@ -97,6 +98,7 @@ const navigationLightTheme: NavigationTheme = {
     background: paperLightTheme.colors.background,
     onBackground: paperLightTheme.colors.onBackground,
     surfaceVariant: paperLightTheme.colors.surfaceVariant,
+    primaryContainer: paperLightTheme.colors.primaryContainer,
   },
 };
 
@@ -108,6 +110,7 @@ const navigationDarkTheme: NavigationTheme = {
     background: paperDarkTheme.colors.background,
     onBackground: paperDarkTheme.colors.onBackground,
     surfaceVariant: paperDarkTheme.colors.surfaceVariant,
+    primaryContainer: paperDarkTheme.colors.primaryContainer,
   },
   dark: true,
 };

@@ -3,7 +3,7 @@ import {useColorScheme} from 'react-native';
 import {useUpdateEffect} from 'ahooks';
 import {useAppearance} from '@/utils/appearance';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {useAccessToken, useActive} from '@/utils/httpClient';
+import {useAccessToken, useActive, useAxiosInterceptor} from '@/utils/httpClient';
 import {useStaff} from '@/utils/staff';
 
 const useAppEffect = () => {
@@ -35,6 +35,8 @@ const useAppEffect = () => {
   useUpdateEffect(() => {
     setAppearance(themeScheme);
   }, [rnColorScheme]);
+
+  useAxiosInterceptor();
 };
 
 export default useAppEffect;

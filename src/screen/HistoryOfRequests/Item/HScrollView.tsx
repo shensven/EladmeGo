@@ -47,7 +47,9 @@ function HScrollView(props: Props) {
                 borderRadius: BORDER_RADIUS - PADDING,
                 overflow: 'hidden',
               }}>
-              {key}={keyValueSets[key]}
+              {key === 'Authorization'
+                ? key + ' = ' + keyValueSets[key].slice(0, 48) + '...'
+                : key + ' = ' + keyValueSets[key]}
             </Text>
           ))}
         </View>
@@ -55,9 +57,5 @@ function HScrollView(props: Props) {
     </View>
   );
 }
-
-HScrollView.defaultProps = {
-  hScrollViewStyle: {},
-};
 
 export default HScrollView;

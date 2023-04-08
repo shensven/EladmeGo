@@ -2,9 +2,17 @@ import {Platform, View} from 'react-native';
 import React from 'react';
 import {Text} from 'react-native-paper';
 import {useAppearance} from '@/utils/appearance';
+import type {HttpLog} from '@/utils/httpClient';
 import Color from 'color';
+import dayjs from 'dayjs';
 
-function Status() {
+type Props = {
+  status: HttpLog['resp']['status'];
+  timestamp: HttpLog['timestamp'];
+};
+
+function Status(props: Props) {
+  const {status, timestamp} = props;
   const {paperTheme} = useAppearance();
 
   return (
@@ -17,7 +25,7 @@ function Status() {
           fontVariant: ['tabular-nums'],
           color: Color(paperTheme.colors.onBackground).alpha(0.7).hexa(),
         }}>
-        200
+        {status}
       </Text>
       <View
         style={{
@@ -36,7 +44,7 @@ function Status() {
           fontVariant: ['tabular-nums'],
           color: Color(paperTheme.colors.onBackground).alpha(0.7).hexa(),
         }}>
-        2023-01-01 00:00:00
+        {dayjs(timestamp).format('YYYY-MM-DD HH:mm:ss')}
       </Text>
     </View>
   );

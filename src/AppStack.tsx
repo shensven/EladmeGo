@@ -73,7 +73,7 @@ function AppStack() {
         <Screen
           name="HistoryOfRequests"
           component={HistoryOfRequests}
-          options={{headerTitle: '最近请求(WIP)', headerRight: HistoryOfRequestsHeaderRight}}
+          options={{headerTitle: '最近请求', headerRight: HistoryOfRequestsHeaderRight, headerTransparent: true}}
         />
         <Screen name="Appearance" component={Appearance} options={{headerTitle: '外观'}} />
         <Screen name="OpenSourceLibraries" component={OpenSourceLibraries} options={{headerTitle: '开源库'}} />

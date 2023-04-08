@@ -4,10 +4,10 @@ import {Text} from 'react-native-paper';
 import {useAppearance} from '@/utils/appearance';
 import Color from 'color';
 
-type Props = {path: string};
+type Props = {method: string; path: string};
 
 function API(props: Props) {
-  const {path} = props;
+  const {method, path} = props;
   const {paperTheme} = useAppearance();
 
   return (
@@ -27,7 +27,7 @@ function API(props: Props) {
           textAlignVertical: 'center',
           textAlign: 'center',
         }}>
-        GET
+        {method.toUpperCase()}
       </Text>
       <Text
         variant="bodySmall"
