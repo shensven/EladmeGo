@@ -40,6 +40,12 @@ jest.mock('@react-navigation/stack', () => {
   };
 });
 
+jest.mock('@react-navigation/elements', () => {
+  return {
+    useHeaderHeight: jest.fn().mockReturnValue(0),
+  };
+});
+
 jest.mock('@react-navigation/devtools', () => {
   return {
     useFlipper: jest.fn(),
