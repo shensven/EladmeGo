@@ -16,13 +16,13 @@ type Props = {
 function PassQrView(props: Props) {
   const {countdown, isRefrashLoading, onPress} = props;
   const screenWidth = Dimensions.get('screen').width;
-
+  const screenHeight = Dimensions.get('screen').height;
   const {paperTheme} = useAppearance();
   const {passQr} = usePassQr();
 
   return (
     <View style={{alignItems: 'center'}}>
-      <View style={{height: 48, justifyContent: 'flex-end'}}>
+      <View style={{height: screenHeight < 576 ? 32 : 48, justifyContent: 'flex-end'}}>
         <Text>{passQr?.enterprise_name}</Text>
       </View>
       <View
@@ -48,7 +48,7 @@ function PassQrView(props: Props) {
           style={{width: screenWidth / 1.5, height: screenWidth / 1.5}}
         />
       </View>
-      <View style={{height: 24, justifyContent: 'flex-end'}}>
+      <View style={{height: screenHeight < 576 ? 12 : 24, justifyContent: 'flex-end'}}>
         {passQr && (
           <Text
             variant="bodySmall"

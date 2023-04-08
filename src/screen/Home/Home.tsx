@@ -14,6 +14,7 @@ import BottomButton from './BottomButton';
 
 function Home() {
   const screenWidth = Dimensions.get('screen').width;
+  const screenHeight = Dimensions.get('screen').height;
   const {paperTheme} = useAppearance();
   const {accessToken, is401Status} = useAccessToken();
   const {isStaff} = useStaff();
@@ -84,9 +85,9 @@ function Home() {
           onValueChange={setPassCategory}
           buttons={[
             {label: '二维码通行', value: 'qrcode'},
-            {label: '蓝牙通行', value: 'ble'},
+            {label: '蓝牙通行(WIP)', value: 'ble'},
           ]}
-          style={{width: screenWidth / 1.5 + 24, marginTop: 16}}
+          style={{width: screenWidth / 1.5 + 24, marginTop: screenHeight < 576 ? 8 : 16}}
         />
       )}
       {accessToken.length > 0 && !is401Status && isStaff.isStaff === 0 && (
