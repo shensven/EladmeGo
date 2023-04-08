@@ -1,5 +1,6 @@
 import React, {PropsWithChildren} from 'react';
-import GorhomBottomSheet, {BottomSheetBackdrop} from '@gorhom/bottom-sheet';
+import {Platform} from 'react-native';
+import GorhomBottomSheet, {BottomSheetBackdrop, useBottomSheetSpringConfigs} from '@gorhom/bottom-sheet';
 import type {BottomSheetBackdropProps} from '@gorhom/bottom-sheet';
 import {useAppearance} from '@/utils/appearance';
 import useBottomSheet from './useBottomSheet';
@@ -13,12 +14,22 @@ const BottomSheetContainer = (props: PropsWithChildren<{}>) => {
   const {paperTheme} = useAppearance();
   const {bottomSheetRef} = useBottomSheet();
 
+  const animationConfigs = useBottomSheetSpringConfigs({
+    damping: 100,
+    mass: 1,
+    stiffness: 500,
+    overshootClamping: true,
+    restDisplacementThreshold: 0.01,
+    restSpeedThreshold: 0.01,
+  });
+
   return (
     <GorhomBottomSheet
       ref={bottomSheetRef}
       index={-1}
       snapPoints={['63%']}
       enablePanDownToClose
+      animationConfigs={Platform.OS === 'android' ? animationConfigs : undefined}
       backdropComponent={renderBackdrop}
       style={{
         marginHorizontal: 16,
