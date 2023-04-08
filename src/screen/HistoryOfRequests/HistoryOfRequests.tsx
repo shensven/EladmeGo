@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
 import {Divider} from 'react-native-paper';
+import {FlashList} from '@shopify/flash-list';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useAppearance} from '@/utils/appearance';
 import {useAtom} from 'jotai';
@@ -25,10 +25,11 @@ function HistoryOfRequests() {
   return (
     <>
       <Header />
-      <FlatList
+      <FlashList
         data={httpLog}
         renderItem={renderItem}
         keyExtractor={item => item.timestamp.toString()}
+        estimatedItemSize={130}
         ListFooterComponent={<View />}
         ListFooterComponentStyle={{height: insets.bottom}}
         ItemSeparatorComponent={PaperDivider}

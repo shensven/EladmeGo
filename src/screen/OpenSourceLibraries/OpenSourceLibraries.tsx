@@ -1,6 +1,6 @@
 import React from 'react';
 import {Linking, View} from 'react-native';
-import {FlatList} from 'react-native-gesture-handler';
+import {FlashList} from '@shopify/flash-list';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {IcRoundOpenInNew} from '@/component/Icon';
 import {useAppearance} from '@/utils/appearance';
@@ -42,9 +42,10 @@ function OpenSourceLibraries() {
   };
 
   return (
-    <FlatList
+    <FlashList
       data={data}
       renderItem={renderItem}
+      estimatedItemSize={40}
       keyExtractor={(item, index) => item.name + index}
       ListFooterComponent={<View />}
       ListFooterComponentStyle={{height: insets.bottom}}
