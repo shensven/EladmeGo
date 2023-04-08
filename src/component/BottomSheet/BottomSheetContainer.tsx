@@ -8,7 +8,7 @@ const renderBackdrop = (bottomSheetBackdropProps: BottomSheetBackdropProps) => (
   <BottomSheetBackdrop {...bottomSheetBackdropProps} disappearsOnIndex={-1} />
 );
 
-const BottomSheet = (props: PropsWithChildren<{}>) => {
+const BottomSheetContainer = (props: PropsWithChildren<{}>) => {
   const {children} = props;
   const {paperTheme} = useAppearance();
   const {bottomSheetRef} = useBottomSheet();
@@ -40,4 +40,4 @@ const BottomSheet = (props: PropsWithChildren<{}>) => {
   );
 };
 
-export default BottomSheet;
+export default BottomSheetContainer;

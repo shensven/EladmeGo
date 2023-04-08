@@ -1,20 +1,21 @@
 import React from 'react';
+import 'react-native-get-random-values';
 import {Provider as PaperProvider} from 'react-native-paper';
 import {StatusBar} from 'react-native-bars';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {useAppEffect} from './src/utils/appEffect';
-import {useAsyncStorageFlipperPlugin} from './src/utils/asyncStorage';
-import {useAppearance} from './src/utils/appearance';
-import AppStack from './src/AppStack';
-import {BottomSheet, BottomSheetProvider} from './src/component/BottomSheet';
-import {FloorListView as HomeFloorListView} from '@/screen/Home';
-import {DebugView} from '@/component/DebugView';
-import 'react-native-get-random-values';
+import {useAppEffect} from '@/utils/appEffect';
+import {useAsyncStorageFlipperPlugin} from '@/utils/asyncStorage';
+import {useAppearance} from '@/utils/appearance';
+import {BottomSheet as DebugBottomSheet, DebugView} from '@/component/DebugView';
+import {BottomSheetContainer, BottomSheetProvider, useBottomSheet} from '@/component/BottomSheet';
+import {BottomSheet as HomeFloorListView} from '@/screen/Home';
+import AppStack from '@/AppStack';
 
 function App() {
   useAppEffect();
   useAsyncStorageFlipperPlugin();
   const {paperTheme, statusBarStyle} = useAppearance();
+  const {bottomSheetInvoker} = useBottomSheet();
 
   return (
     <GestureHandlerRootView style={{flex: 1}}>
@@ -22,9 +23,10 @@ function App() {
         <StatusBar animated={true} barStyle={statusBarStyle} />
         <BottomSheetProvider>
           <AppStack />
-          <BottomSheet>
-            <HomeFloorListView />
-          </BottomSheet>
+          <BottomSheetContainer>
+            {bottomSheetInvoker === 'floorPicker' && <HomeFloorListView />}
+            {bottomSheetInvoker === 'debug' && <DebugBottomSheet />}
+          </BottomSheetContainer>
           {__DEV__ && <DebugView />}
         </BottomSheetProvider>
       </PaperProvider>

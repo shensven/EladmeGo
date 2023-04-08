@@ -1,3 +1,4 @@
 export {default as BottomSheetProvider} from './BottomSheetProvider';
-export {default as BottomSheet} from './BottomSheet';
+export {default as BottomSheetContainer} from './BottomSheetContainer';
 export {default as useBottomSheet} from './useBottomSheet';
+export type {BottomSheetInvoker} from './useBottomSheet';

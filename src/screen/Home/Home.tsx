@@ -7,7 +7,7 @@ import {useAppearance} from '@/utils/appearance';
 import {useAccessToken} from '@/utils/httpClient';
 import {useStaff} from '@/utils/staff';
 import {usePassQr} from '@/utils/passQr';
-import {countdownAtom} from '@/utils/status/atom';
+import {countdownAtom, isAutoRefreshTokenAtom} from '@/utils/status/atom';
 import InitView from './InitView';
 import PassQrView from './PassQrView';
 import BottomButton from './BottomButton';
@@ -23,6 +23,7 @@ function Home() {
   const [isInitShow, setIsInitShow] = useState(false);
   const [passCategory, setPassCategory] = useState('qrcode');
   const [countdown, setCountdown] = useAtom(countdownAtom);
+  const [isAutoRefreshToken] = useAtom(isAutoRefreshTokenAtom);
   const [isRefrashLoading, setIsRefrashLoading] = useState(false);
 
   const setCountdownViaPassQrGot = async () => {
@@ -51,7 +52,7 @@ function Home() {
   }, [accessToken]);
 
   useEffect(() => {
-    if (isStaff.isStaff === 1 && !is401Status) {
+    if (isStaff.isStaff === 1 && !is401Status && isAutoRefreshToken) {
       const timer = setInterval(() => {
         setCountdown(prev => {
           // console.log('prevCountdown', prev);
@@ -66,7 +67,7 @@ function Home() {
       }, 1000);
       return () => clearInterval(timer);
     }
-  }, [isStaff, passQr, is401Status]);
+  }, [isStaff, passQr, is401Status, isAutoRefreshToken]);
 
   return (
     <View style={{flex: 1, alignItems: 'center'}}>

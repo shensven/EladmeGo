@@ -6,6 +6,7 @@ import type {SystemBarStyle} from 'react-native-bars';
 import type {NavigationTheme} from '@/utils/appearance';
 import type {HttpLog} from '@/utils/httpClient';
 import type {PassQr} from '@/utils/passQr';
+import type {BottomSheetInvoker} from '@/component/BottomSheet';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const storage: any = createJSONStorage(() => AsyncStorage);
@@ -14,6 +15,7 @@ const themeSchemeAtom = atomWithStorage<'light' | 'dark' | 'system'>('themeSchem
 const statusBarStyleAtom = atom<SystemBarStyle>('dark-content');
 const paperThemeAtom = atom<MD3Theme>(paperLightTheme);
 const navigationThemeAtom = atom<NavigationTheme>(navigationLightTheme);
+const bottomSheetInvokerAtom = atom<BottomSheetInvoker | undefined>(undefined);
 
 const httpLogAtom = atomWithStorage<HttpLog[]>('httpLog', [], storage);
 
@@ -24,11 +26,14 @@ const passQrAtom = atom<PassQr | undefined>(undefined);
 const countdownAtom = atom<number>(0);
 const lastFloorUsedAtom = atomWithStorage<number | undefined>('lastFloorUsed', undefined, storage);
 
+const isAutoRefreshTokenAtom = atom(true);
+
 export {
   themeSchemeAtom,
   statusBarStyleAtom,
   paperThemeAtom,
   navigationThemeAtom,
+  bottomSheetInvokerAtom,
   httpLogAtom,
   accessTokenAtom,
   is401StatusAtom,
@@ -36,4 +41,5 @@ export {
   passQrAtom,
   countdownAtom,
   lastFloorUsedAtom,
+  isAutoRefreshTokenAtom,
 };

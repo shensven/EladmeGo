@@ -27,7 +27,7 @@ function BottomButton() {
         }}
         style={{marginTop: 8, borderRadius: 16, justifyContent: 'center', alignItems: 'center'}}
         contentStyle={{width: screenWidth / 1.5 + 24}}
-        onPress={expand}>
+        onPress={() => expand('floorPicker')}>
         选择楼层
       </Button>
     </View>
