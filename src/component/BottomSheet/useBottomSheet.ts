@@ -11,7 +11,6 @@ const useBottomSheet = () => {
 
   const close = () => {
     bottomSheetRef?.current?.close();
-    setBottomSheetInvoker(undefined);
   };
 
   const expand = (invoker: BottomSheetInvoker) => {
@@ -20,7 +19,11 @@ const useBottomSheet = () => {
     bottomSheetRef?.current?.expand();
   };
 
-  return {bottomSheetRef, close, expand, bottomSheetInvoker};
+  const resetBottomSheetInvoker = () => {
+    setBottomSheetInvoker(undefined);
+  };
+
+  return {bottomSheetRef, close, expand, bottomSheetInvoker, resetBottomSheetInvoker};
 };
 
 export default useBottomSheet;
