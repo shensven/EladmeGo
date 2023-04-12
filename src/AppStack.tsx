@@ -5,7 +5,7 @@ import {HeaderStyleInterpolators, TransitionPresets, createStackNavigator} from 
 import {useFlipper} from '@react-navigation/devtools';
 import {navigationLightTheme, useAppearance} from '@/utils/appearance';
 import {Home, HeaderRight as HomeHeaderRight, HeaderTitle} from '@/screen/Home';
-import {InviteVisitors} from '@/screen/InviteVisitors';
+import {InviteVisitors, HeaderRight as InviteVisitorsHeaderRight} from '@/screen/InviteVisitors';
 import {Settings} from '@/screen/Settings';
 import {Welcome} from '@/screen/Welcome';
 import {AccessToken} from '@/screen/AccessToken';
@@ -51,7 +51,11 @@ function AppStack() {
             headerRight: HomeHeaderRight,
           }}
         />
-        <Screen name="InviteVisitors" component={InviteVisitors} options={{headerTitle: '邀请访客(WIP)'}} />
+        <Screen
+          name="InviteVisitors"
+          component={InviteVisitors}
+          options={{headerTitle: '邀请访客', headerRight: InviteVisitorsHeaderRight}}
+        />
         <Screen name="Settings" component={Settings} options={{headerTitle: '设置'}} />
         <Screen
           name="Welcome"

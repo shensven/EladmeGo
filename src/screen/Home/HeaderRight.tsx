@@ -4,6 +4,8 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import {IconButton} from 'react-native-paper';
 import {useAppearance} from '@/utils/appearance';
+import {useAccessToken} from '@/utils/httpClient';
+import {useStaff} from '@/utils/staff';
 import {IcRoundMoreHoriz, IcRoundMoreVert, IcRoundShareArrivalTime} from '@/component/Icon';
 
 function IconButtonShare() {
@@ -36,11 +38,15 @@ type StackParamList = {
 type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
 
 function HeaderRight() {
+  const {accessToken, is401Status} = useAccessToken();
+  const {isStaff} = useStaff();
   const navigation = useNavigation<ScreenNavigationProp>();
 
   return (
     <View style={{flexDirection: 'row', alignItems: 'center'}}>
-      <IconButton icon={IconButtonShare} onPress={() => navigation.navigate('InviteVisitors')} />
+      {accessToken.length > 0 && isStaff.isStaff === 1 && !is401Status && (
+        <IconButton icon={IconButtonShare} onPress={() => navigation.navigate('InviteVisitors')} />
+      )}
       <IconButton icon={IconButtonMore} onPress={() => navigation.navigate('Settings')} />
     </View>
   );
