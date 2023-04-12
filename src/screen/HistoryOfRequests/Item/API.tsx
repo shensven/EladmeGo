@@ -37,7 +37,7 @@ function API(props: Props) {
           marginLeft: 8,
           color: paperTheme.colors.onBackground,
         }}>
-        {path}
+        /{path}
       </Text>
     </View>
   );

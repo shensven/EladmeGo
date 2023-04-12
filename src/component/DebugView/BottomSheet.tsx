@@ -47,7 +47,7 @@ function BottomSheet() {
         }}>
         debug
       </Text>
-      <LabelAction label="自动刷新 QR Code">
+      <LabelAction label="自动刷新通行二维码">
         <Switch value={isAutoRefreshQrCode} onValueChange={toogleAutoRefreshQrCode} />
       </LabelAction>
       <LabelAction label="Mock 公司名称" style={{marginTop: 8}}>
