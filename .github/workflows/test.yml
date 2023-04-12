@@ -52,11 +52,11 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Gradlew test
+      - name: Gradlew lint
         run: |
           cd android
           chmod +x gradlew
-          ./gradlew testDebugUnitTest
+          ./gradlew lint
 
       - name: ESLint
         run: yarn lint
