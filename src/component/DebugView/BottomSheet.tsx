@@ -28,8 +28,14 @@ function LabelAction(props: PropsWithChildren<{label: string; style?: ViewStyle}
 
 function BottomSheet() {
   const {paperTheme} = useAppearance();
-  const {isAutoRefreshQrCode, toogleAutoRefreshQrCode, enableEnterpriseNameMocking, toogleEnterpriseNameMoclking} =
-    useDebug();
+  const {
+    isAutoRefreshQrCode,
+    toogleAutoRefreshQrCode,
+    enableEnterpriseNameMocking,
+    toogleEnterpriseNameMoclking,
+    enableQrCodeMocking,
+    toogleQrCodeMocking,
+  } = useDebug();
 
   return (
     <ScrollView style={{paddingHorizontal: 24}}>
@@ -46,6 +52,9 @@ function BottomSheet() {
       </LabelAction>
       <LabelAction label="Mock 公司名称" style={{marginTop: 8}}>
         <Switch value={enableEnterpriseNameMocking} onValueChange={toogleEnterpriseNameMoclking} />
+      </LabelAction>
+      <LabelAction label="Mock 通行二维码" style={{marginTop: 8}}>
+        <Switch value={enableQrCodeMocking} onValueChange={toogleQrCodeMocking} />
       </LabelAction>
     </ScrollView>
   );

@@ -4,9 +4,11 @@ import {Text, TouchableRipple} from 'react-native-paper';
 import Image from 'react-native-image-progress';
 import {Bar as ProgressBar} from 'react-native-progress';
 import Color from 'color';
+import {SvgXml} from 'react-native-svg';
 import {useAppearance} from '@/utils/appearance';
 import {usePassQr} from '@/utils/passQr';
 import {useDebug} from '@/utils/debug';
+import qrCodeMocking from './qrCodeMocking.svg';
 
 type Props = {
   countdown: number;
@@ -21,7 +23,7 @@ function PassQrView(props: Props) {
   const {paperTheme} = useAppearance();
   const {passQr} = usePassQr();
 
-  const {enableEnterpriseNameMocking} = useDebug();
+  const {enableEnterpriseNameMocking, enableQrCodeMocking} = useDebug();
 
   return (
     <View style={{alignItems: 'center'}}>
@@ -38,18 +40,23 @@ function PassQrView(props: Props) {
           borderRadius: 24,
           marginTop: 8,
         }}>
-        <Image
-          source={{uri: passQr?.qrCode}}
-          indicator={ProgressBar}
-          indicatorProps={{
-            indeterminate: true,
-            borderWidth: 1,
-            borderColor: paperTheme.colors.outline,
-            color: paperTheme.colors.primaryContainer,
-          }}
-          threshold={0}
-          style={{width: screenWidth / 1.5, height: screenWidth / 1.5}}
-        />
+        {enableQrCodeMocking && (
+          <SvgXml xml={qrCodeMocking.toString()} width={screenWidth / 1.5} height={screenWidth / 1.5} />
+        )}
+        {!enableQrCodeMocking && (
+          <Image
+            source={{uri: passQr?.qrCode}}
+            indicator={ProgressBar}
+            indicatorProps={{
+              indeterminate: true,
+              borderWidth: 1,
+              borderColor: paperTheme.colors.outline,
+              color: paperTheme.colors.primaryContainer,
+            }}
+            threshold={0}
+            style={{width: screenWidth / 1.5, height: screenWidth / 1.5}}
+          />
+        )}
       </View>
       <View style={{height: 24, justifyContent: 'flex-end'}}>
         {passQr && (

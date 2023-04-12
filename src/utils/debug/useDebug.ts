@@ -3,7 +3,7 @@ import {debugAtom} from '../status/atom';
 
 const useDebug = () => {
   const [debug, setDebug] = useAtom(debugAtom);
-  const {isAutoRefreshQrCode, enableEnterpriseNameMocking} = debug;
+  const {isAutoRefreshQrCode, enableEnterpriseNameMocking, enableQrCodeMocking} = debug;
 
   const toogleAutoRefreshQrCode = () => {
     setDebug(prev => ({
@@ -19,7 +19,21 @@ const useDebug = () => {
     }));
   };
 
-  return {isAutoRefreshQrCode, toogleAutoRefreshQrCode, enableEnterpriseNameMocking, toogleEnterpriseNameMoclking};
+  const toogleQrCodeMocking = () => {
+    setDebug(prev => ({
+      ...prev,
+      enableQrCodeMocking: !prev.enableQrCodeMocking,
+    }));
+  };
+
+  return {
+    isAutoRefreshQrCode,
+    toogleAutoRefreshQrCode,
+    enableEnterpriseNameMocking,
+    toogleEnterpriseNameMoclking,
+    enableQrCodeMocking,
+    toogleQrCodeMocking,
+  };
 };
 
 export default useDebug;

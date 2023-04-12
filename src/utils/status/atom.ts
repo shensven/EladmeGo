@@ -29,6 +29,7 @@ const lastFloorUsedAtom = atomWithStorage<number | undefined>('lastFloorUsed', u
 const debugAtom = atom({
   isAutoRefreshQrCode: true,
   enableEnterpriseNameMocking: false,
+  enableQrCodeMocking: false,
 });
 
 export {
