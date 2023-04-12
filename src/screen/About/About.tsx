@@ -1,9 +1,10 @@
 import React from 'react';
 import {Image, View} from 'react-native';
-import {Text, useTheme} from 'react-native-paper';
+import {Text} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import DeviceInfo from 'react-native-device-info';
 import Color from 'color';
+import {useAppearance} from '@/utils/appearance';
 
 declare const global: {
   HermesInternal: null | {
@@ -15,7 +16,7 @@ declare const global: {
 
 function About() {
   const insets = useSafeAreaInsets();
-  const {colors} = useTheme();
+  const {colors} = useAppearance().paperTheme;
 
   const hermeVersion = global.HermesInternal?.getRuntimeProperties?.()['OSS Release Version'] ?? '';
 

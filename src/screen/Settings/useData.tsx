@@ -2,7 +2,7 @@ import React from 'react';
 import {Linking} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import type {StackScreenProps} from '@react-navigation/stack';
-import {useTheme} from 'react-native-paper';
+import {useAppearance} from '@/utils/appearance';
 import {
   IcRoundAdminPanelSettings,
   IcRoundBugReport,
@@ -27,7 +27,7 @@ type StackParamList = {
 type ScreenNavigationProp = StackScreenProps<StackParamList>['navigation'];
 
 const useData = () => {
-  const {colors} = useTheme();
+  const {colors} = useAppearance().paperTheme;
   const navigation = useNavigation<ScreenNavigationProp>();
 
   let initData: {
