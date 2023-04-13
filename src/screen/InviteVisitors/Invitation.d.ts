@@ -28,20 +28,20 @@ interface Invitation {
       unit_id: number;
       project_id: number;
       qr_code: string;
-      status: number;
-      status_text: '已失效';
-      sex: number;
+      status: 1 | 2;
+      status_text: '已失效' | '生效中';
+      sex: 0;
       sex_text: '';
       remark: string;
-      type: number;
+      type: 1;
       type_text: '访客邀约';
-      created_at: string;
-      updated_at: string;
       rejection_reason: string | null;
       floor: string;
       floor_name: string;
       floorName: string;
       invitation_time: string;
+      created_at: string;
+      updated_at: string;
       unit: {
         id: number;
         name: '高区电梯' | '低区电梯';

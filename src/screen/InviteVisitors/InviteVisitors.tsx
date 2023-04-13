@@ -50,7 +50,7 @@ function InviteVisitors() {
     <FlashList
       data={invitation?.lists.data ?? []}
       renderItem={renderItem}
-      keyExtractor={(item, index) => index.toString()}
+      keyExtractor={item => item.id.toString()}
       estimatedItemSize={130}
       ListHeaderComponent={<View />}
       ListHeaderComponentStyle={{height: 8}}
