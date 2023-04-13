@@ -35,6 +35,8 @@ function BottomSheet() {
     toogleEnterpriseNameMoclking,
     enableQrCodeMocking,
     toogleQrCodeMocking,
+    enableFloorMocking,
+    toogleFloorMocking,
   } = useDebug();
 
   return (
@@ -55,6 +57,9 @@ function BottomSheet() {
       </LabelAction>
       <LabelAction label="Mock 通行二维码" style={{marginTop: 8}}>
         <Switch value={enableQrCodeMocking} onValueChange={toogleQrCodeMocking} />
+      </LabelAction>
+      <LabelAction label="Mock 选中楼层" style={{marginTop: 8}}>
+        <Switch value={enableFloorMocking} onValueChange={toogleFloorMocking} />
       </LabelAction>
     </ScrollView>
   );

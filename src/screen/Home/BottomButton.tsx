@@ -2,6 +2,7 @@ import React from 'react';
 import {Dimensions, View} from 'react-native';
 import {Button, Text} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useDebug} from '@/utils/debug';
 import {useAppearance} from '@/utils/appearance';
 import {usePassQr} from '@/utils/passQr';
 import {useBottomSheet} from '@/component/BottomSheet';
@@ -13,10 +14,12 @@ function BottomButton() {
   const {passQr} = usePassQr();
   const {expand} = useBottomSheet();
 
+  const {enableFloorMocking} = useDebug();
+
   return (
     <View style={{position: 'absolute', bottom: 32 + insets.bottom}}>
       <Text variant="bodySmall" style={{color: paperTheme.colors.onBackground, alignSelf: 'center'}}>
-        {passQr?.floor_name}
+        {enableFloorMocking ? '金地中心-高区电梯-34F' : passQr?.floor_name}
       </Text>
       <Button
         mode="contained"

@@ -30,6 +30,7 @@ const debugAtom = atom({
   isAutoRefreshQrCode: true,
   enableEnterpriseNameMocking: false,
   enableQrCodeMocking: false,
+  enableFloorMocking: false,
 });
 
 export {
