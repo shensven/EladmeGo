@@ -1,6 +1,7 @@
 # EladmeGo
 
 [![Test](https://github.com/shensven/EladmeGo/actions/workflows/test.yml/badge.svg?branch=dev)](https://github.com/shensven/EladmeGo/actions/workflows/test.yml)
+[![CodeQL](https://github.com/shensven/EladmeGo/actions/workflows/codeql.yml/badge.svg?branch=dev)](https://github.com/shensven/EladmeGo/actions/workflows/codeql.yml)
 [![Publish](https://github.com/shensven/EladmeGo/actions/workflows/publish.yml/badge.svg?branch=main)](https://github.com/shensven/EladmeGo/actions/workflows/publish.yml)
 
 本项目是昆明金地中心访问通行的移动端轮子
