@@ -4,6 +4,7 @@
 [![Test](https://github.com/shensven/EladmeGo/actions/workflows/test.yml/badge.svg?branch=dev)](https://github.com/shensven/EladmeGo/actions/workflows/test.yml)
 [![CodeQL](https://github.com/shensven/EladmeGo/actions/workflows/codeql.yml/badge.svg?branch=dev)](https://github.com/shensven/EladmeGo/actions/workflows/codeql.yml)
 [![Publish](https://github.com/shensven/EladmeGo/actions/workflows/publish.yml/badge.svg?branch=main)](https://github.com/shensven/EladmeGo/actions/workflows/publish.yml)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fshensven%2FEladmeGo.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fshensven%2FEladmeGo?ref=badge_shield)
 
 A mobile app for accessing the JindiCenter in Kunming
 
@@ -67,3 +68,6 @@ yarn react-native generate-bootsplash src/assets/splash/bootsplash.png \
 ## ⚖️ License
 
 EladmeGo is licensed under the [MIT license](./LICENSE).
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fshensven%2FEladmeGo.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fshensven%2FEladmeGo?ref=badge_large)
