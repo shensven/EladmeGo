@@ -28,13 +28,16 @@ A mobile app for accessing the JindiCenter in Kunming
 
 - [Node 14](https://nodejs.org) or higher
 - [yarn](https://yarnpkg.com/getting-started/install)
-- [Watchman](https://formulae.brew.sh/formula/watchman)
+- [Watchman](https://facebook.github.io/watchman)
 - [Xcode 10](https://developer.apple.com/xcode/resources) or higher
 - [CocoaPods](https://guides.cocoapods.org/using/getting-started.html)
 - [JDK 11](https://formulae.brew.sh/formula/openjdk@11) or higher
 - Android SDK
   - Build-Tools `33.0.0`
   - NDK `23.1.7779620`
+
+For more detailed environment configuration, please refer to the official React Native documentation.👇 
+https://reactnative.dev/docs/environment-setup
 
 ### Get Started
 
@@ -55,6 +58,10 @@ yarn ios --configuration Release --device
 cd android && chmod +x gradlew
 ./gradlew assembleRelease
 ```
+
+### Debug
+
+We recommend you to use [Flipper](https://fbflipper.com/) to debug the app.
 
 ### Generate the Splash Screen
 
