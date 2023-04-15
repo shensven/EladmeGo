@@ -36,7 +36,7 @@ const usePassQr = () => {
     }
 
     const resp: AxiosResponse<{code: number; message: string; result: PassQr}> = await axiosInstance.get(
-      'member/v1/member/getPassQr',
+      '/member/v1/member/getPassQr',
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,

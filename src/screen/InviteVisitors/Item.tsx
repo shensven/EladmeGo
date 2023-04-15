@@ -19,7 +19,7 @@ function Item(props: ItemProps) {
   return (
     <View
       style={{
-        marginHorizontal: 16,
+        marginHorizontal: 20,
         borderRadius: 16,
         overflow: 'hidden',
       }}>

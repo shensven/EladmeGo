@@ -65,7 +65,7 @@ function AccessToken() {
   );
 
   return (
-    <View style={{padding: 16}}>
+    <View style={{paddingHorizontal: 20, paddingVertical: 16}}>
       <TextInput
         mode="outlined"
         multiline={false}

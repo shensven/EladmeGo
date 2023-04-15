@@ -21,7 +21,7 @@ function InviteVisitors() {
   const getData = async () => {
     setRefreshing(true);
     const resp: AxiosResponse<{code: number; message: string; result: Invitation}> = await axiosInstance.get(
-      'member/v1/invitation/lists',
+      '/member/v1/invitation/lists',
       {
         headers: {
           Authorization: `Bearer ${accessToken}`,

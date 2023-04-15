@@ -28,7 +28,7 @@ function Appearance() {
 
   return (
     <ScrollView>
-      <View style={{margin: 16, borderRadius: 16, overflow: 'hidden'}}>
+      <View style={{marginVertical: 16, marginHorizontal: 20, borderRadius: 16, overflow: 'hidden'}}>
         {appearances.map((item, index) => (
           <TouchableRipple key={item.label + index} onPress={item.onPress}>
             <View
