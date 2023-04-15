@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {ActivityIndicator, Dimensions, View} from 'react-native';
+import {ActivityIndicator, View, useWindowDimensions} from 'react-native';
 import {SegmentedButtons, Text} from 'react-native-paper';
 import {useAtom} from 'jotai';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -16,8 +16,7 @@ import BottomButton from './BottomButton';
 function Home() {
   const {isAutoRefreshQrCode} = useDebug();
 
-  const screenWidth = Dimensions.get('screen').width;
-  const screenHeight = Dimensions.get('screen').height;
+  const {width: windowWidth, height: windowHeight} = useWindowDimensions();
   const {paperTheme} = useAppearance();
   const {accessToken, is401Status} = useAccessToken();
   const {isStaff} = useStaff();
@@ -90,7 +89,7 @@ function Home() {
             {label: '二维码通行', value: 'qrcode'},
             {label: '蓝牙通行(WIP)', value: 'ble'},
           ]}
-          style={{width: screenWidth / 1.5 + 24, marginTop: screenHeight < 576 ? 8 : 16}}
+          style={{width: windowWidth / 1.5 + 24, marginTop: windowHeight < 576 ? 8 : 16}}
         />
       )}
       {accessToken.length > 0 && !is401Status && isStaff.isStaff === 0 && (
@@ -99,7 +98,7 @@ function Home() {
         </View>
       )}
       {isStaff.isStaff === 1 && !is401Status && !passQr && (
-        <View style={{height: screenWidth / 1.5 - 48, justifyContent: 'flex-end'}}>
+        <View style={{height: windowWidth / 1.5 - 48, justifyContent: 'flex-end'}}>
           <ActivityIndicator animating={isRefrashLoading} size="large" color={paperTheme.colors.onBackground} />
         </View>
       )}

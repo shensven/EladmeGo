@@ -1,8 +1,9 @@
 import React from 'react';
-import {View, Dimensions, ActivityIndicator, Platform} from 'react-native';
+import {View, ActivityIndicator, Platform, useWindowDimensions} from 'react-native';
 import {Text, TouchableRipple} from 'react-native-paper';
 import Image from 'react-native-image-progress';
 import {Bar as ProgressBar} from 'react-native-progress';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Color from 'color';
 import {SvgXml} from 'react-native-svg';
 import {useAppearance} from '@/utils/appearance';
@@ -18,30 +19,30 @@ type Props = {
 
 function PassQrView(props: Props) {
   const {countdown, isRefrashLoading, onPress} = props;
-  const screenWidth = Dimensions.get('screen').width;
-  const screenHeight = Dimensions.get('screen').height;
+  const {width: windowWidth, height: windowHeight} = useWindowDimensions();
+  const insets = useSafeAreaInsets();
   const {paperTheme} = useAppearance();
   const {passQr} = usePassQr();
 
   const {enableEnterpriseNameMocking, enableQrCodeMocking} = useDebug();
 
   return (
-    <View style={{alignItems: 'center'}}>
-      <View style={{height: screenHeight < 576 ? 32 : 48, justifyContent: 'flex-end'}}>
+    <View style={{alignItems: 'center', paddingBottom: 104 + 16 + insets.bottom}}>
+      <View style={{height: windowHeight < 576 ? 32 : 48, justifyContent: 'flex-end'}}>
         <Text>{enableEnterpriseNameMocking ? '昆明我爱你你也爱我有限公司' : passQr?.enterprise_name}</Text>
       </View>
       <View
         style={{
           justifyContent: 'center',
           alignItems: 'center',
-          width: screenWidth / 1.5 + 24,
-          height: screenWidth / 1.5 + 24,
+          width: windowWidth / 1.5 + 24,
+          height: windowWidth / 1.5 + 24,
           backgroundColor: '#fff',
           borderRadius: 24,
           marginTop: 8,
         }}>
         {enableQrCodeMocking && (
-          <SvgXml xml={qrCodeMocking.toString()} width={screenWidth / 1.5} height={screenWidth / 1.5} />
+          <SvgXml xml={qrCodeMocking.toString()} width={windowWidth / 1.5} height={windowWidth / 1.5} />
         )}
         {!enableQrCodeMocking && (
           <Image
@@ -54,7 +55,7 @@ function PassQrView(props: Props) {
               color: paperTheme.colors.primaryContainer,
             }}
             threshold={0}
-            style={{width: screenWidth / 1.5, height: screenWidth / 1.5}}
+            style={{width: windowWidth / 1.5, height: windowWidth / 1.5}}
           />
         )}
       </View>
@@ -73,7 +74,7 @@ function PassQrView(props: Props) {
       <TouchableRipple
         borderless
         disabled={isRefrashLoading}
-        style={{marginTop: screenHeight < 576 ? 8 : 16, borderRadius: 8}}
+        style={{marginTop: windowHeight < 576 ? 8 : 16, borderRadius: 8}}
         onPress={onPress}>
         <View
           style={{

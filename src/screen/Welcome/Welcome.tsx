@@ -1,10 +1,10 @@
 import React, {useEffect} from 'react';
-import {View, Image, Dimensions, useColorScheme} from 'react-native';
+import {View, Image, useColorScheme, useWindowDimensions} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
 import {useAppearance} from '@/utils/appearance';
 
 function Welcome() {
-  const screenHeight = Dimensions.get('screen').height;
+  const {height: windowHeight} = useWindowDimensions();
   const rnColorScheme = useColorScheme();
   const {themeScheme, setStatusBarStyle} = useAppearance();
 
@@ -32,7 +32,7 @@ function Welcome() {
   }, [isFocused]);
 
   return (
-    <View style={{flex: 1, alignItems: 'center', marginTop: screenHeight / 2 - 160}}>
+    <View style={{flex: 1, alignItems: 'center', marginTop: windowHeight / 2 - 160}}>
       <Image source={require('@/assets/splash/bootsplash.png')} style={{width: 240, height: 240}} />
     </View>
   );

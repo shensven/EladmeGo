@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Dimensions} from 'react-native';
+import {View, useWindowDimensions} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
 import {Text} from 'react-native-paper';
 import {useAppearance} from '@/utils/appearance';
@@ -13,14 +13,14 @@ type Props = {
 
 function HScrollView(props: Props) {
   const {title, keyValueSets} = props;
-  const screenWidth = Dimensions.get('screen').width;
+  const {width: windowWidth} = useWindowDimensions();
   const {paperTheme} = useAppearance();
 
   const BORDER_RADIUS = 10;
   const PADDING = 4;
 
   return (
-    <View style={{width: screenWidth}}>
+    <View style={{width: windowWidth}}>
       <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <View
           style={{
