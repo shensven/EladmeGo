@@ -4,8 +4,7 @@ import {Divider} from 'react-native-paper';
 import {FlashList} from '@shopify/flash-list';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useAppearance} from '@/utils/appearance';
-import {useAtom} from 'jotai';
-import {httpLogAtom} from '@/utils/status/atom';
+import {useHttpLog} from '@/utils/httpLog';
 // import Header from './Header';
 import {Item, ItemProps} from './Item';
 
@@ -16,7 +15,7 @@ function PaperDivider() {
 
 function HistoryOfRequests() {
   const insets = useSafeAreaInsets();
-  const [httpLog] = useAtom(httpLogAtom);
+  const {httpLog} = useHttpLog();
 
   const renderItem = ({item}: {item: ItemProps}) => {
     return <Item timestamp={item.timestamp} url={item.url} req={item.req} resp={item.resp} onPress={item.onPress} />;

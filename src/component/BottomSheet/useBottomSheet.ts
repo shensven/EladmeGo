@@ -3,7 +3,7 @@ import {useAtom} from 'jotai';
 import {bottomSheetInvokerAtom} from '@/utils/status/atom';
 import {BottomSheetContext} from './BottomSheetProvider';
 
-type BottomSheetInvoker = 'floorPicker' | 'debug';
+type BottomSheetInvoker = 'floorPicker' | 'historyOfRequestsOptions' | 'debug';
 
 const useBottomSheet = () => {
   const [bottomSheetInvoker, setBottomSheetInvoker] = useAtom(bottomSheetInvokerAtom);

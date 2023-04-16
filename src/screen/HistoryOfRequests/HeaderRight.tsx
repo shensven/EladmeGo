@@ -1,11 +1,11 @@
 import React from 'react';
 import {View} from 'react-native';
 import {IconButton, Text} from 'react-native-paper';
-import {useAtom} from 'jotai';
-import {httpLogAtom} from '@/utils/status/atom';
+import {useHttpLog} from '@/utils/httpLog';
 import {useAppearance} from '@/utils/appearance';
 import {IcRoundMiscellaneousServices} from '@/component/Icon';
-import Color from 'color';
+import {useBottomSheet} from '@/component/BottomSheet';
+import color from 'color';
 
 function IcRoundMiscellaneousServicesSvg() {
   const {navigationTheme} = useAppearance();
@@ -14,14 +14,15 @@ function IcRoundMiscellaneousServicesSvg() {
 
 function HeaderRight() {
   const {navigationTheme} = useAppearance();
-  const [httpLog] = useAtom(httpLogAtom);
+  const {expand} = useBottomSheet();
+  const {httpLog} = useHttpLog();
 
   return (
     <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
-      <Text variant="titleSmall" style={{color: Color(navigationTheme.colors.text).alpha(0.5).hexa()}}>
+      <Text variant="titleSmall" style={{color: color(navigationTheme.colors.text).alpha(0.5).hexa()}}>
         {httpLog.length} 个项目
       </Text>
-      <IconButton icon={IcRoundMiscellaneousServicesSvg} onPress={() => {}} />
+      <IconButton icon={IcRoundMiscellaneousServicesSvg} onPress={() => expand('historyOfRequestsOptions')} />
     </View>
   );
 }

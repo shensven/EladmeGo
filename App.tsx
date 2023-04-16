@@ -9,6 +9,7 @@ import {useAppearance} from '@/utils/appearance';
 import {BottomSheet as DebugBottomSheet, DebugView} from '@/component/DebugView';
 import {BottomSheetContainer, BottomSheetProvider, useBottomSheet} from '@/component/BottomSheet';
 import {BottomSheet as HomeFloorListView} from '@/screen/Home';
+import {BottomSheet as HistoryOfRequestsBottomSheet} from '@/screen/HistoryOfRequests';
 import AppStack from '@/AppStack';
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
           <AppStack />
           <BottomSheetContainer>
             {bottomSheetInvoker === 'floorPicker' && <HomeFloorListView />}
+            {bottomSheetInvoker === 'historyOfRequestsOptions' && <HistoryOfRequestsBottomSheet />}
             {bottomSheetInvoker === 'debug' && <DebugBottomSheet />}
           </BottomSheetContainer>
           {__DEV__ && <DebugView />}

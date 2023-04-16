@@ -1,6 +1,5 @@
 import {useMemo} from 'react';
-import {useAtom} from 'jotai';
-import {httpLogAtom} from '@/utils/status/atom';
+import {useHttpLog} from '@/utils/httpLog';
 import axiosInstance from './axiosInstance';
 
 type HttpLog = {
@@ -23,7 +22,7 @@ type HttpLog = {
 };
 
 const useAxiosInterceptor = () => {
-  const [, setHttpLog] = useAtom(httpLogAtom);
+  const {setHttpLog} = useHttpLog();
 
   useMemo(() => {
     axiosInstance.interceptors.response.use(
