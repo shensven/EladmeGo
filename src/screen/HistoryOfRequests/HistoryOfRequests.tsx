@@ -6,7 +6,7 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useAppearance} from '@/utils/appearance';
 import {useAtom} from 'jotai';
 import {httpLogAtom} from '@/utils/status/atom';
-import Header from './Header';
+// import Header from './Header';
 import {Item, ItemProps} from './Item';
 
 function PaperDivider() {
@@ -24,7 +24,7 @@ function HistoryOfRequests() {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <FlashList
         data={httpLog}
         renderItem={renderItem}
