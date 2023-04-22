@@ -36,7 +36,7 @@ A mobile app for accessing the JindiCenter in Kunming
   - Build-Tools `33.0.0`
   - NDK `23.1.7779620`
 
-For more detailed environment configuration, please refer to the official React Native documentation.👇 
+For more detailed environment configuration, please refer to the official React Native documentation.👇
 https://reactnative.dev/docs/environment-setup
 
 ### Get Started
