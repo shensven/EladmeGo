@@ -54,9 +54,13 @@ jobs:
 
       - name: Gradlew lint
         run: |
-          cd android
-          chmod +x gradlew
+          cd android && chmod +x gradlew
           ./gradlew lint
+
+      - name: Gradlew test
+        run: |
+          cd android
+          ./gradlew testDebugUnitTest
 
       - name: ESLint
         run: yarn lint
