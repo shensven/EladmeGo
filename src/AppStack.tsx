@@ -14,8 +14,9 @@ import {
   useHeaderTitle as useHistoryOfRequestsHeaderTitle,
   HistoryOfRequests,
 } from '@/screen/HistoryOfRequests';
+import {HttpDetail} from '@/screen/HttpDetail';
 import {Appearance} from '@/screen/Appearance';
-import {OpenSourceLibraries} from './screen/OpenSourceLibraries';
+import {OpenSourceLibraries} from '@/screen/OpenSourceLibraries';
 import {About} from '@/screen/About';
 
 const {Navigator, Screen} = createStackNavigator();
@@ -84,6 +85,11 @@ function AppStack() {
             headerTitle: styledHttpLogCount,
             headerRight: HistoryOfRequestsHeaderRight,
           }}
+        />
+        <Screen
+          name="HttpDetail"
+          component={HttpDetail}
+          options={{headerTitle: 'HTTP 详情', headerBackTitle: '返回'}}
         />
         <Screen name="Appearance" component={Appearance} options={{headerTitle: '外观'}} />
         <Screen name="OpenSourceLibraries" component={OpenSourceLibraries} options={{headerTitle: '开源库'}} />

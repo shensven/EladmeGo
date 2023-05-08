@@ -8,15 +8,16 @@ import HScrollView from './HScrollView';
 import {HttpLog} from '@/utils/httpClient';
 
 type ItemProps = {
+  uuid: HttpLog['uuid'];
   timestamp: HttpLog['timestamp'];
   url: HttpLog['url'];
   req: HttpLog['req'];
   resp: HttpLog['resp'];
-  onPress?: (timestamp: HttpLog['timestamp']) => void;
+  onPress?: (uuid: HttpLog['uuid']) => void;
 };
 
 function Item(props: ItemProps) {
-  const {timestamp, url, req, resp, onPress} = props;
+  const {uuid, timestamp, url, req, resp, onPress} = props;
 
   const {method, url: api, query} = url;
   const {headers: reqHeaders} = req;
@@ -27,7 +28,7 @@ function Item(props: ItemProps) {
 
   return (
     <View>
-      <TouchableRipple style={{paddingHorizontal: 16, paddingVertical: 20}} onPress={() => onPress?.(timestamp)}>
+      <TouchableRipple style={{paddingHorizontal: 16, paddingVertical: 20}} onPress={() => onPress?.(uuid)}>
         <RequestView hasHeader={hasReqHeaders} hasQuery={hasQuery}>
           {method && api && <API method={method} path={api} />}
           <Status status={status} timestamp={timestamp} />

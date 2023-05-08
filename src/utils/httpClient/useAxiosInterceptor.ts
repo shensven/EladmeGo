@@ -1,8 +1,10 @@
 import {useMemo} from 'react';
 import {useHttpLog} from '@/utils/httpLog';
+import {v4 as uuidv4} from 'uuid';
 import axiosInstance from './axiosInstance';
 
 type HttpLog = {
+  uuid: string;
   timestamp: number;
   url: {
     method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HEAD' | 'OPTIONS' | 'TRACE' | 'CONNECT' | string;
@@ -34,9 +36,11 @@ const useAxiosInterceptor = () => {
         // console.log('url', {method, host: baseURL, url, query: params});
         // console.log('req', {headers: reqHeaders, body});
         // console.log('resp', {headers: respHeaders, status, body: data});
+
         setHttpLog(prev => {
           return [
             {
+              uuid: uuidv4(),
               timestamp: new Date().getTime(),
               url: {method, host: baseURL, url, query: params},
               req: {headers: reqHeaders, body},
