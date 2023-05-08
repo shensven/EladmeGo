@@ -4,12 +4,16 @@ import {NavigationContainer, useNavigationContainerRef} from '@react-navigation/
 import {HeaderStyleInterpolators, TransitionPresets, createStackNavigator} from '@react-navigation/stack';
 import {useFlipper} from '@react-navigation/devtools';
 import {navigationLightTheme, useAppearance} from '@/utils/appearance';
-import {Home, HeaderRight as HomeHeaderRight, HeaderTitle} from '@/screen/Home';
+import {Home, HeaderRight as HomeHeaderRight, HeaderTitle as HomeHeaderTitle} from '@/screen/Home';
 import {InviteVisitors, HeaderRight as InviteVisitorsHeaderRight} from '@/screen/InviteVisitors';
 import {Settings} from '@/screen/Settings';
 import {Welcome} from '@/screen/Welcome';
 import {AccessToken} from '@/screen/AccessToken';
-import {HeaderRight as HistoryOfRequestsHeaderRight, HistoryOfRequests} from '@/screen/HistoryOfRequests';
+import {
+  HeaderRight as HistoryOfRequestsHeaderRight,
+  useHeaderTitle as useHistoryOfRequestsHeaderTitle,
+  HistoryOfRequests,
+} from '@/screen/HistoryOfRequests';
 import {Appearance} from '@/screen/Appearance';
 import {OpenSourceLibraries} from './screen/OpenSourceLibraries';
 import {About} from '@/screen/About';
@@ -19,6 +23,7 @@ const {Navigator, Screen} = createStackNavigator();
 function AppStack() {
   const {navigationTheme} = useAppearance();
   const navigationRef = useNavigationContainerRef();
+  const styledHttpLogCount = useHistoryOfRequestsHeaderTitle();
   useFlipper(navigationRef);
 
   return (
@@ -31,9 +36,7 @@ function AppStack() {
       <Navigator
         initialRouteName="EladmeGo"
         screenOptions={{
-          headerTitleStyle: {
-            fontWeight: 'bold',
-          },
+          headerTitleStyle: {fontWeight: 'bold'},
           headerStyle: {
             elevation: 0, // Android
             shadowOpacity: 0, // iOS
@@ -47,7 +50,7 @@ function AppStack() {
           name="EladmeGo"
           component={Home}
           options={{
-            headerTitle: HeaderTitle,
+            headerTitle: HomeHeaderTitle,
             headerRight: HomeHeaderRight,
           }}
         />
@@ -77,7 +80,10 @@ function AppStack() {
         <Screen
           name="HistoryOfRequests"
           component={HistoryOfRequests}
-          options={{headerTitle: '最近请求', headerRight: HistoryOfRequestsHeaderRight}}
+          options={{
+            headerTitle: styledHttpLogCount,
+            headerRight: HistoryOfRequestsHeaderRight,
+          }}
         />
         <Screen name="Appearance" component={Appearance} options={{headerTitle: '外观'}} />
         <Screen name="OpenSourceLibraries" component={OpenSourceLibraries} options={{headerTitle: '开源库'}} />
