@@ -8,16 +8,19 @@ import HScrollView from './HScrollView';
 import {HttpLog} from '@/utils/httpClient';
 
 type ItemProps = {
-  uuid: HttpLog['uuid'];
-  timestamp: HttpLog['timestamp'];
-  url: HttpLog['url'];
-  req: HttpLog['req'];
-  resp: HttpLog['resp'];
+  // uuid: HttpLog['uuid'];
+  // timestamp: HttpLog['timestamp'];
+  // url: HttpLog['url'];
+  // req: HttpLog['req'];
+  // resp: HttpLog['resp'];
+  httpLog: HttpLog;
   onPress?: (uuid: HttpLog['uuid']) => void;
 };
 
 function Item(props: ItemProps) {
-  const {uuid, timestamp, url, req, resp, onPress} = props;
+  // const {uuid, timestamp, url, req, resp, onPress} = props;
+  const {httpLog, onPress} = props;
+  const {uuid, timestamp, url, req, resp} = httpLog;
 
   const {method, url: api, query} = url;
   const {headers: reqHeaders} = req;

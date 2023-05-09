@@ -24,7 +24,7 @@ type HttpLog = {
 };
 
 const useAxiosInterceptor = () => {
-  const {setHttpLog} = useHttpLog();
+  const {setHttpLogs} = useHttpLog();
 
   useMemo(() => {
     axiosInstance.interceptors.response.use(
@@ -37,7 +37,7 @@ const useAxiosInterceptor = () => {
         // console.log('req', {headers: reqHeaders, body});
         // console.log('resp', {headers: respHeaders, status, body: data});
 
-        setHttpLog(prev => {
+        setHttpLogs(prev => {
           return [
             {
               uuid: uuidv4(),

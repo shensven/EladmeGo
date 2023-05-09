@@ -2,13 +2,13 @@ import {useAtom} from 'jotai';
 import {httpLogAtom} from '@/utils/status/atom';
 
 const useHttpLog = () => {
-  const [httpLog, setHttpLog] = useAtom(httpLogAtom);
+  const [httpLogs, setHttpLogs] = useAtom(httpLogAtom);
 
   const clear = () => {
-    setHttpLog([]);
+    setHttpLogs([]);
   };
 
-  return {httpLog, setHttpLog, clear};
+  return {httpLogs, setHttpLogs, clear};
 };
 
 export default useHttpLog;

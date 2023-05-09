@@ -7,16 +7,17 @@ import {FlashList} from '@shopify/flash-list';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useAppearance} from '@/utils/appearance';
 import {useHttpLog} from '@/utils/httpLog';
-// import Header from './Header';
-import {Item, ItemProps} from './Item';
+import {Item} from './Item';
+import type {ItemProps} from './Item';
 
 function PaperDivider() {
   const {paperTheme} = useAppearance();
   return <Divider style={{backgroundColor: paperTheme.colors.outline}} />;
 }
+
 export type StackParams = {
   HttpDetail: {
-    uuid: ItemProps['uuid'];
+    uuid: ItemProps['httpLog']['uuid'];
   };
 };
 type ScreenNavigationProp = StackScreenProps<StackParams>['navigation'];
@@ -24,35 +25,22 @@ type ScreenNavigationProp = StackScreenProps<StackParams>['navigation'];
 function HistoryOfRequests() {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<ScreenNavigationProp>();
-  const {httpLog} = useHttpLog();
+  const {httpLogs} = useHttpLog();
 
-  const renderItem = ({item}: {item: ItemProps}) => {
-    const {uuid, timestamp, url, req, resp} = item;
-    return (
-      <Item
-        uuid={uuid}
-        timestamp={timestamp}
-        url={url}
-        req={req}
-        resp={resp}
-        onPress={uuidCallback => navigation.navigate('HttpDetail', {uuid: uuidCallback})}
-      />
-    );
+  const renderItem = ({item}: {item: ItemProps['httpLog']}) => {
+    return <Item httpLog={item} onPress={uuid => navigation.navigate('HttpDetail', {uuid})} />;
   };
 
   return (
-    <>
-      {/* <Header /> */}
-      <FlashList
-        data={httpLog}
-        renderItem={renderItem}
-        keyExtractor={item => item.uuid}
-        estimatedItemSize={130}
-        ListFooterComponent={<View />}
-        ListFooterComponentStyle={{height: insets.bottom}}
-        ItemSeparatorComponent={PaperDivider}
-      />
-    </>
+    <FlashList
+      data={httpLogs}
+      renderItem={renderItem}
+      keyExtractor={item => item.uuid}
+      estimatedItemSize={130}
+      ListFooterComponent={<View />}
+      ListFooterComponentStyle={{height: insets.bottom}}
+      ItemSeparatorComponent={PaperDivider}
+    />
   );
 }
 
