@@ -38,9 +38,9 @@ function Item(props: ItemProps) {
         </RequestView>
       </TouchableRipple>
       <View style={{position: 'absolute', top: 72}}>
-        {hasReqHeaders && <HScrollView title="Header" keyValueSets={reqHeaders} />}
+        {hasReqHeaders && <HScrollView title="Header" keyValueSets={reqHeaders} separator=": " />}
         {hasReqHeaders && hasQuery && <View style={{height: 8}} />}
-        {hasQuery && <HScrollView title="Query" keyValueSets={query} />}
+        {hasQuery && <HScrollView title="Query" keyValueSets={query} separator="=" />}
       </View>
     </View>
   );

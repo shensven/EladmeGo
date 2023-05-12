@@ -38,7 +38,7 @@ function Appearance() {
                 flexDirection: 'row',
                 alignItems: 'center',
                 justifyContent: 'space-between',
-                backgroundColor: color(paperTheme.colors.secondary).alpha(0.05).toString(),
+                backgroundColor: color(paperTheme.colors.secondary).alpha(0.05).hexa(),
               }}>
               <Text style={{color: paperTheme.colors.onSurface, includeFontPadding: false}}>{item.label}</Text>
               {themeScheme === item.value && <IcRoundCheck width={20} height={20} color={paperTheme.colors.primary} />}

@@ -9,10 +9,11 @@ import {v1 as uuidv1} from 'uuid';
 type Props = {
   title: string;
   keyValueSets: Record<string, string>;
+  separator?: string;
 };
 
 function HScrollView(props: Props) {
-  const {title, keyValueSets} = props;
+  const {title, keyValueSets, separator = ' '} = props;
   const {width: windowWidth} = useWindowDimensions();
   const {paperTheme} = useAppearance();
 
@@ -49,8 +50,8 @@ function HScrollView(props: Props) {
                 overflow: 'hidden',
               }}>
               {key === 'Authorization'
-                ? key + ' = ' + keyValueSets[key].slice(0, 48) + '...'
-                : key + ' = ' + keyValueSets[key]}
+                ? key + separator + keyValueSets[key].slice(0, 48) + '...'
+                : key + separator + keyValueSets[key]}
             </Text>
           ))}
         </View>
