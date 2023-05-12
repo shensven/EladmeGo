@@ -20,7 +20,7 @@ function Method(props: Props) {
           backgroundColor: color(paperTheme.colors.secondary).alpha(0.05).hexa(),
         }}>
         <Text style={{opacity: 0.5, fontSize: 12}}>Method</Text>
-        <Text variant="bodySmall" selectable style={{marginVertical: 8, fontSize: 13}}>
+        <Text variant="bodySmall" style={{marginVertical: 8, fontSize: 13}}>
           {method?.toUpperCase()}
         </Text>
       </View>

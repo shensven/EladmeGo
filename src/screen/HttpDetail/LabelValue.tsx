@@ -17,7 +17,6 @@ function LabelValue(props: Props) {
   return (
     <Text
       variant="bodySmall"
-      selectable
       style={{
         fontSize: 10,
         color: color(paperTheme.colors.onSurface).alpha(0.9).hexa(),
