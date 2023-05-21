@@ -1,4 +1,5 @@
-import React, {PropsWithChildren} from 'react';
+import React, {PropsWithChildren, useEffect, useState} from 'react';
+import {BackHandler} from 'react-native';
 import GorhomBottomSheet, {BottomSheetBackdrop} from '@gorhom/bottom-sheet';
 import type {BottomSheetBackdropProps} from '@gorhom/bottom-sheet';
 import {useAppearance} from '@/utils/appearance';
@@ -12,6 +13,7 @@ const BottomSheetContainer = (props: PropsWithChildren<{}>) => {
   const {children} = props;
   const {paperTheme} = useAppearance();
   const {bottomSheetRef, resetBottomSheetInvoker} = useBottomSheet();
+  const [snapPointIndex, setSnapPointIndex] = useState(-1);
 
   // const animationConfigs = useBottomSheetSpringConfigs({
   //   damping: 100,
@@ -21,6 +23,19 @@ const BottomSheetContainer = (props: PropsWithChildren<{}>) => {
   //   restDisplacementThreshold: 0.01,
   //   restSpeedThreshold: 0.01,
   // });
+
+  useEffect(() => {
+    const backAction = () => {
+      if (snapPointIndex !== -1) {
+        bottomSheetRef?.current?.close();
+        return true;
+      }
+      return false;
+    };
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+
+    return () => backHandler.remove();
+  }, [snapPointIndex]);
 
   return (
     <GorhomBottomSheet
@@ -45,6 +60,7 @@ const BottomSheetContainer = (props: PropsWithChildren<{}>) => {
         backgroundColor: paperTheme.colors.onBackground,
       }}
       onChange={snapPoint => {
+        setSnapPointIndex(snapPoint);
         if (snapPoint === -1) {
           resetBottomSheetInvoker();
         }
