@@ -25,14 +25,14 @@ const BottomSheetContainer = (props: PropsWithChildren<{}>) => {
   // });
 
   useEffect(() => {
-    const backAction = () => {
+    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
       if (snapPointIndex !== -1) {
         bottomSheetRef?.current?.close();
         return true;
       }
+      resetBottomSheetInvoker();
       return false;
-    };
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', backAction);
+    });
 
     return () => backHandler.remove();
   }, [snapPointIndex]);
@@ -61,9 +61,6 @@ const BottomSheetContainer = (props: PropsWithChildren<{}>) => {
       }}
       onChange={snapPoint => {
         setSnapPointIndex(snapPoint);
-        if (snapPoint === -1) {
-          resetBottomSheetInvoker();
-        }
       }}>
       {children}
     </GorhomBottomSheet>
