@@ -6,24 +6,28 @@ jest.useFakeTimers();
 
 jest.mock('react-native/Libraries/Animated/NativeAnimatedHelper');
 
-jest.mock('react-native-reanimated', () => {
-  const Reanimated = require('react-native-reanimated/mock');
-  Reanimated.default.call = () => {};
-  return Reanimated;
-});
-
-jest.mock('@gorhom/bottom-sheet', () => ({
-  ...mockBottomSheet,
-  __esModule: true,
-}));
-
 jest.mock('react-native-flipper', () => {
   return {
     addPlugin: jest.fn(),
   };
 });
 
-jest.mock('react-native-device-info', () => mockRNDeviceInfo);
+jest.mock('react-native-bootsplash', () => {
+  return {
+    hide: jest.fn().mockResolvedValueOnce(),
+    getVisibilityStatus: jest.fn().mockResolvedValue('hidden'),
+  };
+});
+
+jest.mock('@react-native-async-storage/async-storage', () =>
+  require('@react-native-async-storage/async-storage/jest/async-storage-mock'),
+);
+
+jest.mock('@react-navigation/devtools', () => {
+  return {
+    useFlipper: jest.fn(),
+  };
+});
 
 jest.mock('@react-navigation/stack', () => {
   return {
@@ -46,21 +50,18 @@ jest.mock('@react-navigation/elements', () => {
   };
 });
 
-jest.mock('@react-navigation/devtools', () => {
-  return {
-    useFlipper: jest.fn(),
-  };
+jest.mock('react-native-reanimated', () => {
+  const Reanimated = require('react-native-reanimated/mock');
+  Reanimated.default.call = () => {};
+  return Reanimated;
 });
 
-jest.mock('@react-native-async-storage/async-storage', () =>
-  require('@react-native-async-storage/async-storage/jest/async-storage-mock'),
-);
+jest.mock('@gorhom/bottom-sheet', () => ({
+  ...mockBottomSheet,
+  __esModule: true,
+}));
 
-jest.mock('uuid', () => {
-  return {
-    v4: jest.fn().mockReturnValue('uuid'),
-  };
-});
+jest.mock('react-native-device-info', () => mockRNDeviceInfo);
 
 jest.mock('react-native-image-progress', () => {
   return {
@@ -71,5 +72,11 @@ jest.mock('react-native-image-progress', () => {
 jest.mock('react-native-progress', () => {
   return {
     Bar: 'Bar',
+  };
+});
+
+jest.mock('uuid', () => {
+  return {
+    v4: jest.fn().mockReturnValue('uuid'),
   };
 });
