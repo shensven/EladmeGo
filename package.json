@@ -59,7 +59,7 @@
     "eslint": "^8.40.0",
     "jest": "^29.2.1",
     "license-compliance": "^1.2.5",
-    "metro-react-native-babel-preset": "0.73.9",
+    "metro-react-native-babel-preset": "0.76.6",
     "prettier": "^2.8.8",
     "react-native-flipper": "^0.182.0",
     "react-native-svg-transformer": "^1.0.0",
