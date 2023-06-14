@@ -6601,10 +6601,10 @@ react-native-bars@^2.2.0:
   resolved "https://registry.yarnpkg.com/react-native-bars/-/react-native-bars-2.2.0.tgz#a58f680d8b04717f1c9f10f3d906412e1150fa48"
   integrity sha512-gcIOUhMSHsTZ0oKCCOr40DvyyUx+8TtyRPF6RB6IPTVtJXZ64fo+6Cmu6xHDjzGPi1xwC+z6DAA/nNalBCqHog==
 
-react-native-bootsplash@^4.7.1:
-  version "4.7.1"
-  resolved "https://registry.yarnpkg.com/react-native-bootsplash/-/react-native-bootsplash-4.7.1.tgz#81dd588861177a9e81c9f83f1d868797463cf121"
-  integrity sha512-3CIVz3//Bg71XYt5YM7cws1LNj+qzdQhvSz9eAMKBkveXQCpF1q/MatYFEpyCocmhmJc+N2Q6xMIpYSxTvtbWg==
+react-native-bootsplash@^4.7.2:
+  version "4.7.2"
+  resolved "https://registry.yarnpkg.com/react-native-bootsplash/-/react-native-bootsplash-4.7.2.tgz#54955b3886b89ff30707ead3e8bbcda4c3440693"
+  integrity sha512-rdNBWoOHQ3IDa/FRKaelTvHT3cXAYYwI8INGMumYUdvHZVOJXvO+fDYHjUa/8WwGyQeegjHpl2s//AAIDGM3sA==
   dependencies:
     fs-extra "^11.1.1"
     picocolors "^1.0.0"
