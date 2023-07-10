@@ -1717,10 +1717,10 @@
     react-is "^16.13.0"
     use-latest-callback "^0.1.5"
 
-"@react-navigation/devtools@^6.0.18":
-  version "6.0.18"
-  resolved "https://registry.yarnpkg.com/@react-navigation/devtools/-/devtools-6.0.18.tgz#91eb9f80520a708c22026b2f065f6a025c81a5c5"
-  integrity sha512-xII7CMPdhXFWtbMWFSKq/zG8993ISd1lSnlM9PeWQssoNydZjBffM/qH0Md1uu6XqjTdrHd+wrH2Vz4xeSWqLg==
+"@react-navigation/devtools@^6.0.19":
+  version "6.0.19"
+  resolved "https://registry.yarnpkg.com/@react-navigation/devtools/-/devtools-6.0.19.tgz#27f5f2e76fc927976a44d9dacf8035b0a79e9fde"
+  integrity sha512-TfOOy26boJa4FuTYrwrLYIqv3uXZYt1Ighe5vH892ky5xCYgWY8TBwmHVpXQT/3XBCRkqW6ADyrXLCh5/F0JXg==
   dependencies:
     deep-equal "^2.0.5"
     nanoid "^3.1.23"
