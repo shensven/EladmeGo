@@ -28,14 +28,10 @@ function About() {
       <View style={{alignItems: 'center'}}>
         <Image
           source={require('@/assets/appIcon/AppIcon180w.png')}
-          style={{width: 90, height: 90, marginTop: 40, marginBottom: 8}}
+          style={{width: 90, height: 90, marginTop: 40, marginBottom: 16}}
         />
-
-        <Text variant="titleMedium" style={{color: colors.primary}}>
-          EladmeGo
-        </Text>
-        <Text variant="bodySmall" style={{color: colors.onBackground, fontSize: 10}}>
-          Version {version} ({buildNumber})
+        <Text variant="titleSmall" style={{color: colors.primary}}>
+          EladmeGo Version {version} ({buildNumber})
         </Text>
       </View>
       <View style={{alignItems: 'center', paddingBottom: 48}}>
