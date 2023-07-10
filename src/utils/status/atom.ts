@@ -9,7 +9,7 @@ import type {PassQr} from '@/utils/passQr';
 import type {BottomSheetInvoker} from '@/component/BottomSheet';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const storage: any = createJSONStorage(() => AsyncStorage);
+const storage = createJSONStorage<any>(() => AsyncStorage);
 
 const themeSchemeAtom = atomWithStorage<'light' | 'dark' | 'system'>('themeScheme', 'system', storage);
 const statusBarStyleAtom = atom<SystemBarStyle>('dark-content');
